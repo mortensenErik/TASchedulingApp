@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Profile</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    </div>
+    <form class="navbar-form navbar-right" action="/Login/" method="get">
+        <input class="btn btn-warning" type="submit" value="Logout">
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid" style="text-align:left">
+    <div class="row">
+        <div class="col-sm-4">
+            {% load static %}
+            <img src="{% static "defaultProfPic.jpg" %}" class="img-rounded" alt="Your Profile Picture">
+            {% endblock %}
+        </div>
+        <div class="col-sm-8">
+            Name: {{name}}<br>
+            Email: {{email}}<br>
+            Phone Number: {{officePhone}}<br>
+            Role: {{role}}
+        </div>
+    </div>
+    <br>
+    <div class="row" style="text-align:center">
+        <div class="col-sm-4">
+            <form action="/editProfile/" method="get">
+                <input class="btn-lg" type="submit" value="Change Profile Picture">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

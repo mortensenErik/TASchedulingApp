@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>View Courses</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    </div>
+    <form class="navbar-form navbar-right" action="/Profile/" method="get">
+        <input class="btn btn-warning" type="submit" value="My Account">
+    </form>
+    <form class="navbar-form navbar-right" action="/Login/" method="post">
+        <input class="btn btn-warning" type="submit" value="Log Out">
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <form class="form-horizontal" action="/viewCourses/" method="get">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Search:</label>
+            <div class="col-sm-4"><input class="form-control" type="text" id="query"></div>
+        </div>
+    </form>
+
+    <div class="col-sm-12">
+        <table class="table table-bordered table-hover">
+        <thead>
+            <th>Course</th>
+            <th>Instructor</th>
+            <th>Location</th>
+            <th>Hours</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sample1</td>
+                <td>Sample1</td>
+                <td>Sample1</td>
+                <td>Sample1</td>
+            </tr>
+            <tr>
+                <td>Sample2</td>
+                <td>Sample2</td>
+                <td>Sample2</td>
+                <td>Sample2</td>
+            </tr>
+            <tr>
+                <td>Sample3</td>
+                <td>Sample3</td>
+                <td>Sample3</td>
+                <td>Sample3</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

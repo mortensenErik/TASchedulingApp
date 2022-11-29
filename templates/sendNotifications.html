@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Profile</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    </div>
+    <form class="navbar-form navbar-right" action="/Profile/" method="get">
+        <input class="btn btn-warning" type="submit" value="My Account">
+    </form>
+    <form class="navbar-form navbar-right" action="/Login/" method="post">
+        <input class="btn btn-warning" type="submit" value="Log Out">
+    </form>
+  </div>
+</nav>
+
+<form style="text-align:center" action="/sendNotifications/" method="get">
+  <label>Who would you like to notify: </label>
+  <input type="text" id="recipients"><br>
+  <label>What would you like to notify them about: </label>
+  <input type="text" id="subject">
+  <input class="btn-lg" type="submit" value="Send">
+</form>
+
+</body>
+</html>

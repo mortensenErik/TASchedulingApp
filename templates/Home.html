@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Home</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    </div>
+    <form class="navbar-form navbar-right" action="/Profile/" method="get">
+        <input class="btn btn-warning" type="submit" value="My Account">
+    </form>
+    <form class="navbar-form navbar-right" action="/Login/" method="post">
+        <input class="btn btn-warning" type="submit" value="Log Out">
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid" style="text-align:center">
+    <div class="row">
+        <div class="col-sm-4">
+            <form action="/viewUsers/" method="get">
+                <input class="btn-lg" type="submit" value="View Users">
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <form action="/viewCourses/" method="get">
+                <input class="btn-lg" type="submit" value="View Courses">
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <form action="/viewLabs/" method="get">
+                <input class="btn-lg" type="submit" value="View Labs">
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="/sendNotifications/" method="get">
+                <input class="btn-lg" type="submit" value="Notify Users">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
