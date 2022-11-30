@@ -1,5 +1,3 @@
-
-
 class Section:
 
     def __init__(self, id, number, course, teacher, typeOfSection):
@@ -15,4 +13,8 @@ class Section:
     def getTeacher(self, teacher):
         return teacher
 
+    def setTypeOfSection(self, typeOfSection):
+        self.typeOfSection = typeOfSection
 
+    def getTypeOfSection(self):
+        return self.typeOfSection

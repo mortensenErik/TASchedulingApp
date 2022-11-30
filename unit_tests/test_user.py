@@ -16,11 +16,11 @@ class UserUnitTests(TestCase):
         self.edytha = UserProfile.objects.create(name='Edytha', id='edytha', pw='oof', email='edytha@uwm.edu',
                                            phone='202-555-0182')
 
-    def test_list_admin_length(self):
+    def test_list_user_length(self):
         admin_list = UserProfile.objects.filter(len(UserProfile.id) > 3)
         self.assertEqual(len(admin_list), 5)
 
-    def test_list_admin_names(self):
+    def test_list_user_names(self):
         admin_list = list(UserProfile.objects.filter(name='Nigel'))
         self.assertEqual(len(admin_list), 1)
 
