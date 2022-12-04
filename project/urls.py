@@ -1,25 +1,21 @@
-"""project URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import include, path
-
-# You should always use include() when you include other URL patterns. admin.site.urls is the only exception to this.
-# The path() function is passed four arguments, two required: route and view, and two optional: kwargs, and name
+from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('app.urls')),
+    path('', Login.as_view()),
+    path('home/', Home.as_view()),
+    path('profile/', Profile.as_view()),
+    path('new_user/', CreateUser.as_view()),
+    path('new_course/', CreateCourse.as_view()),
+    path('new_section/', CreateSection.as_view()),
+    path('edit_user', EditUser.as_view()),
+    path('edit_course', EditCourse.as_view()),
+    path('edit_section', EditSection.as_view()),
+    path('users/', Users.as_view()),
+    path('courses/', Courses.as_view()),
+    path('sections/', Sections.as_view()),
+    path('notifications/', Notifications.as_view()),
 ]
+
