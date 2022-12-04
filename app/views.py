@@ -1,5 +1,12 @@
 from django.http import HttpResponse
+from django.views import View
+from django.shortcuts import render, redirect
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class Login(View):
+    @staticmethod
+    def get(request):
+        # request.session["username"] = None
+        # request.session["user_type"] = None
+        # request.session["user_id"] = None
+        return render(request, "Login.html")
