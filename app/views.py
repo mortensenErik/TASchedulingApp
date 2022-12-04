@@ -10,4 +10,4 @@ class Login(View):
         request.session["current"] = ""
         # request.session["user_type"] = None
         # request.session["user_id"] = None
-        return render(request, "Login.html")
+        return render(request, "Home.html")
