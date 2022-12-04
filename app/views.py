@@ -36,3 +36,50 @@ class CreateSection(View):
     def get(request):
         return render(request, "createSection.html")
 
+
+class Profile(View):
+    @staticmethod
+    def get(request):
+        return render(request, "Profile.html")
+
+
+class Users(View):
+    @staticmethod
+    def get(request):
+        return render(request, "viewUsers.html")
+
+
+class Sections(View):
+    @staticmethod
+    def get(request):
+        return render(request, "viewSections.html")
+
+
+class Courses(View):
+    @staticmethod
+    def get(request):
+        return render(request, "viewCourses.html")
+
+
+class EditUser(View):
+    @staticmethod
+    def get(request):
+        return render(request, "editProfile.html")
+
+
+class EditCourse(View):
+    @staticmethod
+    def get(request):
+        return render(request, "editCourse.html")
+
+
+class EditSection(View):
+    @staticmethod
+    def get(request):
+        return render(request, "editSection.html")
+
+
+class Notifications(View):
+    @staticmethod
+    def get(request):
+        return render(request, "sendNotifications.html")
