@@ -11,7 +11,7 @@ urlpatterns = [
     path('new_course/', CreateCourse.as_view()),
     path('new_section/', CreateSection.as_view()),
     path('edit_user', EditUser.as_view()),
-    path('edit_profile', EditUser.as_view()),
+    path('edit_course', EditCourse.as_view()),
     path('edit_section', EditSection.as_view()),
     path('users/', Users.as_view()),
     path('courses/', Courses.as_view()),
