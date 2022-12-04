@@ -23,8 +23,7 @@
     <div class="row">
         <div class="col-sm-4">
             {% load static %}
-            <img src={% static "defaultProfPic.jpg" %} class="img-rounded" alt="Your Profile Picture">
-            {% endblock %}
+            <img src="{% static "defaultProfPic.jpg" %}" class="img-rounded" alt="Your Profile Picture">
         </div>
         <div class="col-sm-8">
             Name: {{name}}<br>
