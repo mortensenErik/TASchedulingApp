@@ -4,7 +4,7 @@ from django.db import models
 
 
 class UserProfile(models.Model):
-    id = models.CharField(max_length=20)
+    id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=20)
     pw = models.CharField(max_length=30)
     phone = models.CharField(max_length=12)
@@ -15,7 +15,7 @@ class UserProfile(models.Model):
 
 
 class Course(models.Model):
-    id = models.CharField(max_length=20)
+    id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50, unique=True)
     number = models.CharField(max_length=4,unique=True)
     instructor = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -25,7 +25,7 @@ class Course(models.Model):
 
 
 class Section(models.Model):
-    id = models.CharField(max_length=20)
+    id = models.CharField(max_length=20, primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     number = models.IntegerField
