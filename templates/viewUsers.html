@@ -33,34 +33,24 @@
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
         <thead>
-            <th>User</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>Office Address</th>
-            <th>Office Phone</th>
+            <th>Name:</th>
+            <th>Role:</th>
+            <th>UWM Email:</th>
+            <th>Office Phone:</th>
+            <th>Office Address:</th>
+            <th>Office Hours:</th>
         </thead>
         <tbody>
+            {% for i in users %}
             <tr>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.role }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.address }}</td>
+                <td>{{ i.officeHours }}</td>
             </tr>
-            <tr>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-            </tr>
-            <tr>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-            </tr>
+            {% endfor %}
         </tbody>
         </table>
     </div>

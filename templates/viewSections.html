@@ -33,34 +33,20 @@
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
         <thead>
-            <th>Section</th>
-            <th>Course</th>
-            <th>Instructor</th>
-            <th>Location</th>
-            <th>Hours</th>
+            <th>Course:</th>
+            <th>Section Number:</th>
+            <th>Teacher:</th>
+            <th>Section Type:</th>
         </thead>
         <tbody>
+            {% for i in sections %}
             <tr>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
-                <td>Sample1</td>
+                <td>{{ i.course }}</td>
+                <td>{{ i.number }}</td>
+                <td>{{ i.teacher }}</td>
+                <td>{{ i.type }}</td>
             </tr>
-            <tr>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-                <td>Sample2</td>
-            </tr>
-            <tr>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-                <td>Sample3</td>
-            </tr>
+            {% endfor %}
         </tbody>
         </table>
     </div>

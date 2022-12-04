@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    </div>
+    <form class="navbar-form navbar-right" action="/Profile/" method="get">
+        <input class="btn btn-warning" type="submit" value="My Account">
+    </form>
+    <form class="navbar-form navbar-right" action="/Login/" method="post">
+        <input class="btn btn-warning" type="submit" value="Log Out">
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <h1 class="jumbotron text-center" style="background-color: white">Edit Profile</h1>
+    <form class="form-horizontal" action="/editProfile/" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm-5">Name:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{name}} id="name"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Password:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{password}} id="password"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Office Phone:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{phone}} id="phone"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Office Address:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{address}} id="address"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Office Hours:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{officeHours}} id="officeHours"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Role:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{role}} id="role"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">UWM Email:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{email}} id="email"></div>
+        </div>
+        <div class="form-group">
+            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Save"></div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

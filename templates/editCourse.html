@@ -27,22 +27,15 @@
     <form class="form-horizontal" action="/editCourse/" method="post">
         <div class="form-group">
             <label class="control-label col-sm-5">Course Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="courseName"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseName}} id="courseName"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Course Number:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseNumber}} id="courseNumber"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Course Instructor:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="courseInstructor"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">Course Location:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="courseLocation"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">Course Time:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="courseTime"></div>
-        </div>
-        <div class="form-group">
-            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Save"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseInstructor}} id="courseInstructor"></div>
         </div>
     </form>
 </div>

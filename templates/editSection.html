@@ -26,20 +26,16 @@
     <h1 class="jumbotron text-center" style="background-color: white">Edit Course Section</h1>
     <form class="form-horizontal" action="/editSection/" method="post">
         <div class="form-group">
-            <label class="control-label col-sm-5">Section Name:</label>
+            <label class="control-label col-sm-5">Section Number:</label>
             <div class="col-sm-3"><input class="form-control" type="text" value={{sectionName}} id="sectionName"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Section Instructor/TA:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{sectionInstructor}} id="sectionInstructor"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{sectionLeader}} id="sectionLeader"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Section Location:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{sectionLocation}} id="sectionLocation"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">Section Time:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{sectionTime}} id="sectionTime"></div>
+            <label class="control-label col-sm-5">Section Type:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{sectionType}} id="sectionType"></div>
         </div>
         <div class="form-group">
             <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Save"></div>
