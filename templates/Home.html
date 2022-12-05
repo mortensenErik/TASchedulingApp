@@ -17,6 +17,7 @@
         <input class="btn btn-warning" type="submit" value="My Account">
     </form>
     <form class="navbar-form navbar-right" action="/Login/" method="post">
+        {% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Log Out">
     </form>
   </div>

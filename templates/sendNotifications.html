@@ -17,6 +17,7 @@
         <input class="btn btn-warning" type="submit" value="My Account">
     </form>
     <form class="navbar-form navbar-right" action="/Login/" method="post">
+        {% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Log Out">
     </form>
   </div>
@@ -24,9 +25,9 @@
 
 <form style="text-align:center" action="/sendNotifications/" method="get">
   <label>Who would you like to notify: </label>
-  <input type="text" id="recipients"><br>
+  <input type="text" id="recipients" name="recipients"><br>
   <label>What would you like to notify them about: </label>
-  <input type="text" id="subject">
+  <input type="text" id="subject" name="subject">
   <input class="btn-lg" type="submit" value="Send">
 </form>
 
