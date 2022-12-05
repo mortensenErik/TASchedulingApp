@@ -1,14 +1,7 @@
 from django.urls import path
+from app.views import *
+from . import views
 
-from app.views import createCourse, createSection, createUser, editCourse, editProfile, editSection, Home, Login, \
-    Profile, sendNotifications, viewCourses, viewSections, viewUsers
-
-
-"""
-urlpatterns = [
-    path('', views.index, name='index'),
-]
-"""
 
 urlpatterns = [
     path('', Login.as_view()),

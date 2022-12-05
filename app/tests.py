@@ -1,6 +1,6 @@
 from django.test import TestCase
 from app.models import *
-from .models import Admin
+from .models import UserProfile
 
 # Create your unit_tests here.
 
