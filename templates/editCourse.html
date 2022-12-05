@@ -17,6 +17,7 @@
         <input class="btn btn-warning" type="submit" value="My Account">
     </form>
     <form class="navbar-form navbar-right" action="/Login/" method="post">
+        {% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Log Out">
     </form>
   </div>
@@ -25,17 +26,18 @@
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Edit Course</h1>
     <form class="form-horizontal" action="/editCourse/" method="post">
+        {% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-5">Course Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseName}} id="courseName"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseName}} id="courseName" name="courseName"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Course Number:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseNumber}} id="courseNumber"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseNumber}} id="courseNumber" name="courseNumber"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Course Instructor:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseInstructor}} id="courseInstructor"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" value={{courseInstructor}} id="courseInstructor" name="courseInstructor"></div>
         </div>
     </form>
 </div>

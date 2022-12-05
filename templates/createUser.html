@@ -17,6 +17,7 @@
         <input class="btn btn-warning" type="submit" value="My Account">
     </form>
     <form class="navbar-form navbar-right" action="/Login/" method="post">
+        {% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Log Out">
     </form>
   </div>
@@ -25,33 +26,34 @@
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Create a New User</h1>
     <form class="form-horizontal" action="/createUser/" method="post">
+        {% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-5">UWM Email:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="email"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="email" name="email"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="name"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="name" name="name"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Password:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="password"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="password" name="password"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Role:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="role"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="role" name="role"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Office Phone:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="phone"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="phone" name="phone"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Office Address:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="address"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="address" name="address"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Office Hours:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="officeHours"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="officeHours" name="officeHours"></div>
         </div>
         <div class="form-group">
             <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit"></div>
