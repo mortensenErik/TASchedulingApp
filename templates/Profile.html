@@ -13,7 +13,8 @@
     <div class="navbar-header">
       <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
     </div>
-    <form class="navbar-form navbar-right" action="/Login/" method="get">
+    <form class="navbar-form navbar-right" action="/Login/" method="post">
+        {% csrf_token %}
         <input class="btn btn-warning" type="submit" value="Logout">
     </form>
   </div>
