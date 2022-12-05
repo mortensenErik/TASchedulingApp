@@ -1,7 +1,9 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render, redirect
-
+from django.contrib.auth import login, logout, authenticate
+from classes.UserClass import User
 
 class Login(View):
     @staticmethod
@@ -12,11 +14,26 @@ class Login(View):
         # request.session["user_id"] = None
         return render(request, "Login.html")
 
+    def post(self, request):
+        form = AuthenticationForm(data=request.POST)
+        # if form.is_valid():
+        #     user = form.get_user()
+        #     login(request, user)
+        if User.doesUserExist(request.POST["username"]):
+            print("Condition succeeded")
+            return render(request, "Home.html", {})
+        else:
+            return render(request, "Login.html", {})
+
 
 class Home(View):
     @staticmethod
     def get(request):
         return render(request, "Home.html")
+
+    def post(self, request):
+        logout(request)
+        return redirect("Login.html")
 
 
 class CreateUser(View):

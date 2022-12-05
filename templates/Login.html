@@ -13,11 +13,12 @@
 </div>
 
 <div class="container-fluid" style="text-align:center">
-  <form>
+  <form action = "" method="post">
+      {% csrf_token %}
     <label for="username">Username: </label>
-    <input type="text" id="username"><br>
+    <input type="text" id="username" name="username"><br>
     <label for="password">Password: </label>
-    <input type="text" id="password"><br>
+    <input type="password" id="password" name="password"><br>
     <input class="btn-lg" type="submit" value="Log In">
   </form>
 </div>

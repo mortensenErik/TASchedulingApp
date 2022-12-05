@@ -5,8 +5,8 @@ from django.db import models
 
 class UserProfile(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
-    name = models.CharField(max_length=20)
-    pw = models.CharField(max_length=30)
+    username = models.CharField(max_length=20)
+    password = models.CharField(max_length=30)
     phone = models.CharField(max_length=12)
     address = models.CharField(max_length=30)
     officeHours = models.CharField(max_length=30)
@@ -18,7 +18,7 @@ class Course(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50, unique=True)
     number = models.CharField(max_length=4,unique=True)
-    instructor = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name + " " + self.number
