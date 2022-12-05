@@ -5,25 +5,25 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from classes.UserClass import User
 
+
 class Login(View):
     @staticmethod
     def get(request):
-        # request.session["username"] = None
-        # request.session["current"] = ""
-        # request.session["user_type"] = None
-        # request.session["user_id"] = None
+        # request.["email"] = None
         return render(request, "Login.html")
 
-    def post(self, request):
-        form = AuthenticationForm(data=request.POST)
-        # if form.is_valid():
-        #     user = form.get_user()
-        #     login(request, user)
-        if User.doesUserExist(request.POST["username"]):
-            print("Condition succeeded")
-            return render(request, "Home.html", {})
+    @staticmethod
+    def post(request):
+        user = User.getUserByEmail(request.POST["email"])
+        if user is None:
+            return render(request, "Login.html", {"error": "User does not exist"})
         else:
-            return render(request, "Login.html", {})
+            if user.password != request.POST["password"]:
+                return render(request, "login.html", {"error": "Incorrect Password"})
+            else:
+                request.session["email"] = user.email
+                request.session["role"] = user.role
+                return redirect('home/')
 
 
 class Home(View):
