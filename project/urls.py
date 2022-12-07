@@ -15,6 +15,7 @@ urlpatterns = [
     path('edit_course', EditCourse.as_view()),
     path('edit_section', EditSection.as_view()),
     path('users/', Users.as_view()),
+    path('users/<str:email>/', Users.as_view()),
     path('courses/', Courses.as_view()),
     path('sections/', Sections.as_view()),
     path('notifications/', Notifications.as_view()),

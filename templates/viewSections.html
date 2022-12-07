@@ -10,6 +10,7 @@
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
+      {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
@@ -46,9 +47,10 @@
         </div>
     </form>
     <div style="display:flex; justify-content: center">
-        <button style="background:forestgreen; color:white; margin: 0 auto">
-            + add new section
-        </button>
+       <form action="/new_section" method="get">
+            {% csrf_token %}
+            <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new section">
+        </form>
     </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">

@@ -9,24 +9,42 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    <div class="container-fluid">
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="My Account">
+        </form>
+        <form class="navbar-form navbar-right" action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Log Out">
+        </form>
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
     </div>
-    <form class="navbar-form navbar-right" action="/Profile/" method="get">
-        <input class="btn btn-warning" type="submit" value="My Account">
-    </form>
-    <form class="navbar-form navbar-right" action="/Login/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-warning" type="submit" value="Log Out">
-    </form>
-  </div>
 </nav>
 
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Create a New User</h1>
-    <form class="form-horizontal" action="/createUser/" method="post">
+    <form class="form-horizontal" action="/new_user/" method="post">
         {% csrf_token %}
+        <div class="form-group">
+            <label class="control-label col-sm-5">ID:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="id" name="id"></div>
+        </div>
         <div class="form-group">
             <label class="control-label col-sm-5">UWM Email:</label>
             <div class="col-sm-3"><input class="form-control" type="text" id="email" name="email"></div>
@@ -40,10 +58,6 @@
             <div class="col-sm-3"><input class="form-control" type="text" id="password" name="password"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Role:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="role" name="role"></div>
-        </div>
-        <div class="form-group">
             <label class="control-label col-sm-5">Office Phone:</label>
             <div class="col-sm-3"><input class="form-control" type="text" id="phone" name="phone"></div>
         </div>
@@ -51,10 +65,16 @@
             <label class="control-label col-sm-5">Office Address:</label>
             <div class="col-sm-3"><input class="form-control" type="text" id="address" name="address"></div>
         </div>
-{#        <div class="form-group">#}
-{#            <label class="control-label col-sm-5">Office Hours:</label>#}
-{#            <div class="col-sm-3"><input class="form-control" type="text" id="officeHours" name="officeHours"></div>#}
-{#        </div>#}
+         <div class="form-group">
+            <label class="control-label col-sm-5">Role:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="role" id="role">
+                 <option value="TA">TA</option>
+                 <option value="Admin">Admin</option>
+                 <option value="Instructor">Instructor</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
             <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit"></div>
         </div>

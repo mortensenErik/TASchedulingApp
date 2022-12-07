@@ -50,6 +50,22 @@ class CreateUser(View):
     def get(request):
         return render(request, "createUser.html")
 
+    def post(self, request):
+        creation = User.createUser(
+            id= request.POST["id"],
+            email=request.POST["email"],
+            name=request.POST["name"],
+            password=request.POST["password"],
+            role=request.POST["role"],
+            address=request.POST["address"],
+            phone=request.POST["phone"]
+        )
+        if creation:
+            print('creation is true')
+            return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
+        else:
+            print('creation is false')
+            return render(request, "createUser.html")
 
 class CreateCourse(View):
     @staticmethod
@@ -75,6 +91,9 @@ class Users(View):
     def get(request):
         return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
 
+    def post(self, request, email):
+        User.deleteUser(email)
+        return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
 
 class Sections(View):
     @staticmethod

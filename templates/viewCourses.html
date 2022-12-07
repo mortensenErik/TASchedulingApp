@@ -46,9 +46,10 @@
         </div>
     </form>
     <div style="display:flex; justify-content: center">
-        <button style="background:forestgreen; color:white; margin: 0 auto">
-            + add new course
-        </button>
+        <form action="/new_course" method="get">
+            {% csrf_token %}
+            <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new course">
+        </form>
     </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
