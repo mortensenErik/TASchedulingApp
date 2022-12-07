@@ -1,4 +1,4 @@
-from app.models import UserProfile
+from app.models import *
 
 
 class User:
@@ -12,7 +12,13 @@ class User:
                 return None
         raise TypeError("No parameter provided!")
 
-    def getTAAssignments(user):
-        pass
+    def getTaAssignments(user):
+        result = []
+        for section in Section.objects.all():
+            if section.faculty.id == user.id:
+                result.append(section)
+        return result
+
+
 
 

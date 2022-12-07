@@ -36,7 +36,11 @@
                                          name="query"></div>
         </div>
     </form>
-
+    <div style="display:flex; justify-content: center">
+            <button style="background:forestgreen; color:white; margin: 0 auto">
+        + add new user
+    </button>
+    </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
             <thead>
@@ -49,7 +53,12 @@
             <tbody>
             {% for i in users %}
                 <tr>
-                    <td>{{ i.name }}</td>
+                    <td style="text-align: left">
+                        <span style="text-align: start">
+                            <button STYLE="color:white; background: darkred"> - </button>
+                        </span>
+                        {{ i.name }}
+                    </td>
                     <td>{{ i.role }}</td>
                     <td>{{ i.email }}</td>
                     <td>{{ i.phone }}</td>

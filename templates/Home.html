@@ -33,15 +33,19 @@
         <h1>Current assignments </h1>
         <table class="table table-bordered table-hover">
             <thead>
-            <th>TA:</th>
+            <th>Section:</th>
             <th>Assigned to:</th>
             </thead>
             <tbody>
-            {% for i in users %}
-                {% if i.role == "TA" %}
+            {% for i in sections %}
+                {% if i.type == "LAB" %}
                 <tr>
-                    <td>{{ i.name }}</td>
-                    <td>{{ User.getTa }}</td>
+                    <td>{{ i }}</td>
+                    {% if i.faculty %}
+                        <td>{{ i.faculty.name }}</td>
+                    {% else %}
+                        <td>No TAs assigned</td>
+                    {% endif %}
                 </tr>
                 {% endif %}
             {% endfor %}
