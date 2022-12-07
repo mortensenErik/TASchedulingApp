@@ -37,10 +37,7 @@ class Login(View):
 class Home(View):
     @staticmethod
     def get(request):
-        # result = []
-        # for user in UserProfile.objects.all():
-        #
-        return render(request, "Home.html", {"sections": Section.objects.all()})
+        return render(request, "Home.html", {"users": UserProfile.objects.all()})
 
     def post(self, request):
         del request.session["email"]
@@ -82,14 +79,13 @@ class Users(View):
 class Sections(View):
     @staticmethod
     def get(request):
-        return render(request, "viewSections.html")
+        return render(request, "viewSections.html", {"sections": Section.objects.all()})
 
 
 class Courses(View):
     @staticmethod
     def get(request):
-        return render(request, "viewCourses.html")
-
+        return render(request, "viewCourses.html", {"courses": Course.objects.all()})
 
 class EditUser(View):
     @staticmethod

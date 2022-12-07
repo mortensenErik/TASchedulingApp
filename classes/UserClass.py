@@ -12,12 +12,12 @@ class User:
                 return None
         raise TypeError("No parameter provided!")
 
-    def getTaAssignments(user):
-        result = []
-        for section in Section.objects.all():
-            if section.faculty.id == user.id:
-                result.append(section)
-        return result
+    # def getTaAssignments(user):
+    #     result = []
+    #     for section in Section.objects.all():
+    #         if section.faculty.id == user.id:
+    #             result.append(section)
+    #     return result
 
 
 

@@ -25,6 +25,14 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Users">
         </form>
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
     </div>
 </nav>
 
@@ -33,19 +41,27 @@
         <h1>Current assignments </h1>
         <table class="table table-bordered table-hover">
             <thead>
-            <th>Section:</th>
-            <th>Assigned to:</th>
+            <th style="text-align: center">TA:</th>
+            <th style="text-align: center">Assigned to:</th>
             </thead>
             <tbody>
-            {% for i in sections %}
-                {% if i.type == "LAB" %}
+            {% for i in users %}
+                {% if i.role == "TA" %}
                 <tr>
-                    <td>{{ i }}</td>
-                    {% if i.faculty %}
-                        <td>{{ i.faculty.name }}</td>
-                    {% else %}
-                        <td>No TAs assigned</td>
-                    {% endif %}
+                    <td>{{ i.name }}</td>
+                <td>
+                    <table>
+                        {% if i.section_set %}
+                            {% for section in i.section_set.all %}
+                            <tr>
+                                <td>{{ section }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p>This TA is not assigned to anything.</p>
+                        {% endif %}
+                    </table>
+                </td>
                 </tr>
                 {% endif %}
             {% endfor %}

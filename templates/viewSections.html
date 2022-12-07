@@ -10,42 +10,66 @@
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="My Account">
+        </form>
+        <form class="navbar-form navbar-right" action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Log Out">
+        </form>
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+      <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
     </div>
-    <form class="navbar-form navbar-right" action="/Profile/" method="get">
-        <input class="btn btn-warning" type="submit" value="My Account">
-    </form>
-    <form class="navbar-form navbar-right" action="/Login/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-warning" type="submit" value="Log Out">
-    </form>
-  </div>
 </nav>
 
 <div class="container-fluid">
     <form class="form-horizontal" action="/viewCourses/" method="get">
         <div class="form-group">
             <label class="control-label col-sm-4">Search:</label>
-            <div class="col-sm-4"><input class="form-control" type="text" id="query" name="query"></div>
+            <div class="col-sm-4"><input placeholder="Not implemented yet" class="form-control" type="text" id="query"
+                                         name="query"></div>
         </div>
     </form>
-
+    <div style="display:flex; justify-content: center">
+        <button style="background:forestgreen; color:white; margin: 0 auto">
+            + add new section
+        </button>
+    </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
         <thead>
+            <th>Section:</th>
             <th>Course:</th>
-            <th>Section Number:</th>
-            <th>Teacher:</th>
             <th>Section Type:</th>
+            <th>Faculty:</th>
         </thead>
         <tbody>
             {% for i in sections %}
             <tr>
-                <td>{{ i.course }}</td>
-                <td>{{ i.number }}</td>
-                <td>{{ i.teacher }}</td>
+                <td>
+                    <span style="text-align: start">
+                            <button STYLE="color:white; background: darkred"> - </button>
+                        </span>
+                    {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}</td>
+                <td>{{ i.course.name }}</td>
                 <td>{{ i.type }}</td>
+                <td>
+                    {% if i.faculty %}
+                    {{ i.faculty.name }}
+                    {% else %}
+                    <p>No faculty member assigned</p>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

@@ -21,9 +21,13 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
-        <form class="navbar-form navbar-left" action="/" method="get">
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Home">
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
         </form>
     </div>
 </nav>
@@ -37,9 +41,9 @@
         </div>
     </form>
     <div style="display:flex; justify-content: center">
-            <button style="background:forestgreen; color:white; margin: 0 auto">
-        + add new user
-    </button>
+        <button style="background:forestgreen; color:white; margin: 0 auto">
+            + add new user
+        </button>
     </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
