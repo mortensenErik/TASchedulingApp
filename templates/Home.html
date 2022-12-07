@@ -13,6 +13,9 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
+{#        <div>#}
+{#            {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" style="max-height: 100%; max-width: 100%"/>"#}
+{#        </div>#}
         <form class="navbar-form navbar-right" action="/profile/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="My Account">

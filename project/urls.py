@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from app.views import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,4 +19,6 @@ urlpatterns = [
     path('sections/', Sections.as_view()),
     path('notifications/', Notifications.as_view()),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
 
