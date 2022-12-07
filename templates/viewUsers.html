@@ -26,8 +26,8 @@
 <div class="container-fluid">
     <form class="form-horizontal" action="/viewCourses/" method="get">
         <div class="form-group">
-            <label class="control-label col-sm-4">Search:</label>
-            <div class="col-sm-4"><input class="form-control" type="text" id="query" name="query"></div>
+            <label class="control-label col-sm-4" >Search:</label>
+            <div class="col-sm-4"><input placeholder="Not implemented yet" class="form-control" type="text" id="query" name="query"></div>
         </div>
     </form>
 
@@ -39,7 +39,6 @@
             <th>UWM Email:</th>
             <th>Office Phone:</th>
             <th>Office Address:</th>
-            <th>Office Hours:</th>
         </thead>
         <tbody>
             {% for i in users %}
@@ -49,7 +48,6 @@
                 <td>{{ i.email }}</td>
                 <td>{{ i.phone }}</td>
                 <td>{{ i.address }}</td>
-                <td>{{ i.officeHours }}</td>
             </tr>
             {% endfor %}
         </tbody>

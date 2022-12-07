@@ -4,6 +4,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from classes.UserClass import User
+from app.models import *
 
 
 class Login(View):
@@ -72,7 +73,7 @@ class Profile(View):
 class Users(View):
     @staticmethod
     def get(request):
-        return render(request, "viewUsers.html")
+        return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
 
 
 class Sections(View):

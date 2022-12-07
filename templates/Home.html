@@ -21,39 +21,15 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right" action="/users/" method="get">
             {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Admin">
+            <input class="btn btn-warning" type="submit" value="Users">
         </form>
     </div>
 </nav>
 
 <div class="container-fluid" style="text-align:center">
-    <div class="row">
-        <div class="col-sm-4">
-            <form action="/viewUsers/" method="get">
-                <input class="btn-lg" type="submit" value="View Users">
-            </form>
-        </div>
-        <div class="col-sm-4">
-            <form action="/viewCourses/" method="get">
-                <input class="btn-lg" type="submit" value="View Courses">
-            </form>
-        </div>
-        <div class="col-sm-4">
-            <form action="/viewLabs/" method="get">
-                <input class="btn-lg" type="submit" value="View Sections">
-            </form>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-sm-12">
-            <form action="/sendNotifications/" method="get">
-                <input class="btn-lg" type="submit" value="Notify Users">
-            </form>
-        </div>
-    </div>
+    <h1>TA assignments. </h1>
 </div>
 
 </body>

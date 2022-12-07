@@ -37,6 +37,7 @@
             <th>Course Name:</th>
             <th>Course Number:</th>
             <th>Instructor:</th>
+            <th>Sections:</th>
         </thead>
         <tbody>
             {% for i in courses %}
@@ -44,6 +45,7 @@
                 <td>{{ i.name }}</td>
                 <td>{{ i.number }}</td>
                 <td>{{ i.instructor }}</td>
+                <td>{{ i.sections }}</td>
             </tr>
             {% endfor %}
         </tbody>

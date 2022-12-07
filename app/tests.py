@@ -71,20 +71,20 @@ class InstructorTest(TestCase):
         instructor_password_list = list(Instructor.object.filter(password=''))
         self.assertEqual(instructor_password_list, [self.shawn, self.haitam, self.erik, self.phani])
 
-class OfficeHoursTest(TestCase):
-    def setUp(self):
-        self.lei = ta.object.create(id= lyao, password = ta123, name = 'Lei', phone = '555-555-5555', address='EMS101',
-                                    email='lyao@uwm.edu', hours = '')
-
-    def test_set_hours(self):
-        self.lei.hours = 'M 2:00-3:30, W 2:00-3:30'
-        self.assertEqual(self.lei.hours, 'M 2:00-3:30, W 2:00-3:30')
-
-    def test_delete_hours(self):
-        self.lei.hours = ''
-        self.assertEqual(self.lei.hours, '')
-
-    def test_hours_limit(self):
-        self.lei.hours = 'T R 9:30-10:30, F 10:00-12:00 and only these words shouldn’t appear'
-        self.assertEqual(self.lei.hours, 'T R 9:30-10:30, F 10:00-12:00 ')
+# class OfficeHoursTest(TestCase):
+#     def setUp(self):
+#         self.lei = ta.object.create(id= lyao, password = ta123, name = 'Lei', phone = '555-555-5555', address='EMS101',
+#                                     email='lyao@uwm.edu', hours = '')
+#
+#     def test_set_hours(self):
+#         self.lei.hours = 'M 2:00-3:30, W 2:00-3:30'
+#         self.assertEqual(self.lei.hours, 'M 2:00-3:30, W 2:00-3:30')
+#
+#     def test_delete_hours(self):
+#         self.lei.hours = ''
+#         self.assertEqual(self.lei.hours, '')
+#
+#     def test_hours_limit(self):
+#         self.lei.hours = 'T R 9:30-10:30, F 10:00-12:00 and only these words shouldn’t appear'
+#         self.assertEqual(self.lei.hours, 'T R 9:30-10:30, F 10:00-12:00 ')
 

@@ -7,10 +7,10 @@ class UserProfile(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=20)
     password = models.CharField(max_length=30)
-    phone = models.CharField(max_length=12)
-    address = models.CharField(max_length=30)
-    officeHours = models.CharField(max_length=30)
-    role = models.CharField(max_length=30)
+    phone = models.CharField(max_length=13)
+    # officeHours = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    role = models.CharField(max_length=20, choices=[('ADMIN', 'admin'), ('INSTRUCTOR', 'Instructor'), ('TA', 'TA')])
     email = models.CharField(max_length=20)
 
 
