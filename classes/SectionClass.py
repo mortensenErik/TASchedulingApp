@@ -40,21 +40,3 @@ def make_section(secinfo: dict) -> Union[ErrorString, bool]:
 
         Section.objects.create(course=(list(lookfor))[0], number=secinfo["number"],type=secinfo["type"] )
         return True
-
-def login(logindata: dict) -> Union[ErrorString, dict]:
-    """handles interacting with the database for logging in. Returns ErrorString (False) on failure, or a dictionary of
-    first and last name and position and username on success"""
-    needed = [("username", str), ("password", str)]
-    check = verify_dict(needed, logindata)
-    if not check:
-        return check
-
-    tempUser = UserProfile.objects.filter(username__iexact=logindata["username"]).exists()
-    if not tempUser:
-        return ErrorString("Error: bad username or password")
-
-    tempUser = UserProfile.objects.get(username__iexact=logindata["username"])
-    if not tempUser.check_password(raw_password=logindata["password"]):
-        return ErrorString("Error: badd username or password")
-
-    return {"first_name": tempUser.first_name, "last_name": tempUser.last_name, "position": tempUser.position}
