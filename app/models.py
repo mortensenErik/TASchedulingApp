@@ -20,7 +20,7 @@ class UserProfile(models.Model):
 class Course(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50, unique=True)
-    number = models.CharField(max_length=4,unique=True)
+    number = models.CharField(max_length=5,unique=True)
     instructor = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
