@@ -17,7 +17,9 @@ urlpatterns = [
     path('users/', Users.as_view()),
     path('users/<str:email>/', Users.as_view()),
     path('courses/', Courses.as_view()),
+    path('courses/<str:id>/', Users.as_view()),
     path('sections/', Sections.as_view()),
+    path('sections/<str:id>/', Users.as_view()),
     path('notifications/', Notifications.as_view()),
 ]
 

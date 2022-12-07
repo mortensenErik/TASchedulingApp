@@ -4,6 +4,8 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from classes.UserClass import User
+from classes.SectionClass import SectionClass
+from classes.CourseClass import CourseClass
 from app.models import *
 
 
@@ -76,8 +78,24 @@ class CreateCourse(View):
 class CreateSection(View):
     @staticmethod
     def get(request):
-        return render(request, "createSection.html")
+        return render(request, "createSection.html", {'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
 
+    def post(self, request):
+        sectionCourse = CourseClass.getCourseById(request.POST["course"])
+        sectionFaculty = User.getUserByEmail(request.POST["faculty"])
+        creation = SectionClass.createSection(
+            id=request.POST["id"],
+            course=sectionCourse,
+            faculty= sectionFaculty,
+            number=int(request.POST["number"]),
+            type=request.POST["type"],
+        )
+        if creation:
+            print('creation is true')
+            return render(request, "viewSections.html", {"sections": Section.objects.all()})
+        else:
+            print('creation is false')
+            return render(request, "createUser.html")
 
 class Profile(View):
     @staticmethod
@@ -99,6 +117,7 @@ class Sections(View):
     @staticmethod
     def get(request):
         return render(request, "viewSections.html", {"sections": Section.objects.all()})
+
 
 
 class Courses(View):

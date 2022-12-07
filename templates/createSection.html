@@ -9,39 +9,76 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    <div class="container-fluid">
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="My Account">
+        </form>
+        <form class="navbar-form navbar-right" action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Log Out">
+        </form>
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
     </div>
-    <form class="navbar-form navbar-right" action="/Profile/" method="get">
-        <input class="btn btn-warning" type="submit" value="My Account">
-    </form>
-    <form class="navbar-form navbar-right" action="/Login/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-warning" type="submit" value="Log Out">
-    </form>
-  </div>
 </nav>
 
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Create a New Course Section</h1>
-    <form class="form-horizontal" action="/createSection/" method="post">
+    <form class="form-horizontal" action="/new_section/" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <label class="control-label col-sm-5">Course:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="course" name="course"></div>
+            <label class="control-label col-sm-5">ID:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="id" name="id"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Course</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="course" id="course">
+                 {% for course in courses %}
+                     <option value={{ course.id }}>{{ course.name }}</option>
+                 {% endfor %}
+                </select>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Section Number:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="sectionNumber" name="sectionNumber"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="number" name="number"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Section Type:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="sectionType" name="sectionType"></div>
+            <label class="control-label col-sm-5">Section type:</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="type" id="type">
+                 <option value="LEC">LEC</option>
+                 <option value="LAB">LAB</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Teacher:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="teacher" name="teacher"></div>
+            <label class="control-label col-sm-5">Faculty: </label>
+            <div class="col-sm-3">
+                <select class="form-control" name="faculty" id="faculty">
+                 {% for user in users %}
+                     {% if user.role == "TA" or user.role == "INSTRUCTOR" %}
+                         <option value={{ user.email }}>{{ user.name }}</option>
+                     {% endif %}
+                 {% endfor %}
+                </select>
+            </div>
         </div>
         <div class="form-group">
             <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit"></div>
