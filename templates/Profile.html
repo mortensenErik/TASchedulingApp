@@ -9,39 +9,61 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/Login/" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Logout">
+        </form>
     </div>
-    <form class="navbar-form navbar-right" action="/Login/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-warning" type="submit" value="Logout">
-    </form>
-  </div>
 </nav>
 
 <div class="container-fluid" style="text-align:left">
     <div class="row">
-        <div class="col-sm-4">
-            {% load static %}
-            <img src="{% static "defaultProfPic.jpg" %}" class="img-rounded" alt="Your Profile Picture">
-        </div>
-        <div class="col-sm-8">
-            Name: {{name}}<br>
-            Role: {{role}}<br>
-            Email: {{email}}<br>
-            Phone Number: {{phone}}<br>
-            Office Address: {{address}}<br>
-            Office Hours: {{officeHours}}
-        </div>
-    </div>
-    <br>
-    <div class="row" style="text-align:center">
-        <div class="col-sm-4">
-            <form action="/editProfile/" method="get">
-                <input class="btn-lg" type="submit" value="Change Profile Picture">
-            </form>
-        </div>
+        <h1>This is the profile page for {{ user.name }}</h1>
+        {#        <form class="form-control" action="/profile/" method="get">#}
+        {#            {% csrf_token %}#}
+        {#            <ul>#}
+        {#                <li>#}
+        {#                    <label class="label-control" for="userID">User ID</label>#}
+        {#                    <input STYLE="background-color: #D3D3D3;" type="number" id="userID" name="userID"#}
+        {#                           value="{{ user.id }}" readonly>#}
+        {#                </li>#}
+        {#                <br>#}
+        {#                <li>#}
+        {#                    <label class="label-control" for="userID">User ID</label>#}
+        {#                    <div STYLE="background-color: #D3D3D3;" type="number" id="userID" name="name"#}
+        {#                           value="{{ user.name }}" readonly>#}
+        {#                </li>#}
+        {#                <br>#}
+        {#            </ul>#}
+        {##}
+        {#        </form>#}
+        <ul>
+            <li>
+                <p> ID: {{ user.id }}</p>
+            </li>
+            <li>
+                <p> Name: {{ user.name }}</p>
+            </li>
+            <li>
+                <p> Email: {{ user.email }}</p>
+            </li>
+            <li>
+                <p> Phone: {{ user.phone }}</p>
+            </li>
+            <li>
+                <p> Address: {{ user.address }}</p>
+            </li>
+            <li>
+                <p> Office Hours: {{ user.officeHours }}</p>
+            </li>
+            <li>
+                <p> Role: {{ user.role }}</p>
+            </li>
+        </ul>
     </div>
 </div>
 

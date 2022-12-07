@@ -9,8 +9,13 @@ from classes.UserClass import User
 class Login(View):
     @staticmethod
     def get(request):
-        # request.["email"] = None
-        return render(request, "Login.html")
+        print('in get')
+        if 'email' not in request.session:
+            print("not in")
+            return render(request, "Login.html")
+        else:
+            print("in")
+            return redirect('/home')
 
     @staticmethod
     def post(request):
@@ -26,14 +31,17 @@ class Login(View):
                 return redirect('home/')
 
 
+
+
 class Home(View):
     @staticmethod
     def get(request):
         return render(request, "Home.html")
 
     def post(self, request):
-        logout(request)
-        return redirect("Login.html")
+        del request.session["email"]
+        del request.session["role"]
+        return redirect('/')
 
 
 class CreateUser(View):
@@ -57,7 +65,8 @@ class CreateSection(View):
 class Profile(View):
     @staticmethod
     def get(request):
-        return render(request, "Profile.html")
+        return render(request, "Profile.html",
+                      {"user": User.getUserByEmail(request.session["email"])})
 
 
 class Users(View):
