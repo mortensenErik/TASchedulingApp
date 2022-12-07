@@ -13,6 +13,9 @@ class UserProfile(models.Model):
     role = models.CharField(max_length=20, choices=[('ADMIN', 'admin'), ('INSTRUCTOR', 'Instructor'), ('TA', 'TA')])
     email = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.role + ": "  + self.name
+
 
 class Course(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
@@ -28,5 +31,9 @@ class Section(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
-    number = models.IntegerField
-    type = models.CharField(max_length=3)
+    number = models.IntegerField(default=0)
+    type = models.CharField(max_length=3, choices=[('LEC', 'lecture'), ('LAB', 'lab')])
+
+    def __str__(self):
+        return self.course.number + "-" + self.number.__str__()
+

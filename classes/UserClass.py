@@ -11,3 +11,8 @@ class User:
             else:
                 return None
         raise TypeError("No parameter provided!")
+
+    def getTAAssignments(user):
+        pass
+
+

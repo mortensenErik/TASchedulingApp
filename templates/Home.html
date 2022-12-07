@@ -29,7 +29,25 @@
 </nav>
 
 <div class="container-fluid" style="text-align:center">
-    <h1>TA assignments. </h1>
+    <div>
+        <h1>Current assignments </h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <th>TA:</th>
+            <th>Assigned to:</th>
+            </thead>
+            <tbody>
+            {% for i in users %}
+                {% if i.role == "TA" %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ User.getTa }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>
