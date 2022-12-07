@@ -29,10 +29,15 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Sections">
         </form>
+        <form class="navbar-form navbar-right" action="/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Home">
+        </form>
     </div>
 </nav>
 
 <div class="container-fluid">
+    <h1 style="text-align: center">Courses</h1>
     <form class="form-horizontal" action="/viewCourses/" method="get">
         <div class="form-group">
             <label class="control-label col-sm-4">Search:</label>

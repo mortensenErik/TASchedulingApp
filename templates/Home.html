@@ -13,9 +13,7 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-{#        <div>#}
-{#            {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" style="max-height: 100%; max-width: 100%"/>"#}
-{#        </div>#}
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="200"/>"
         <form class="navbar-form navbar-right" action="/profile/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="My Account">
@@ -41,7 +39,7 @@
 
 <div class="container-fluid" style="text-align:center">
     <div>
-        <h1>Current assignments </h1>
+        <h1>Current assignments: </h1>
         <table class="table table-bordered table-hover">
             <thead>
             <th style="text-align: center">TA:</th>
