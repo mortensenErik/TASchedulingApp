@@ -9,7 +9,7 @@ class testCreateCourse(TestCase):
                                            instructor='nigel')
 
     def testCreateNewCourse(self):
-        self.monkey.post("new_course/", {"id": "10101", "name": "Binary Math", "number": "CS101", "instructor": "Paul"})
+        self.monkey.post("new_course/", {"id": "10101", "name": "Binary Mathematics", "number": "CS101", "instructor": "Paul"})
         self.assertEqual(len(Course.objects.filter(id='10101')), 1, msg="Course was not created")
 
 

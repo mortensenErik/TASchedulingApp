@@ -9,7 +9,7 @@ class testAdminAssignInstructor(TestCase):
                                                 phone='202-555-0196', address='abc123', officeHours="Appointment Only",
                                                 role="Instructor")
         self.miguel = UserProfile.objects.create(name='Miguel', id='miggy', password='ziggy', email='miggy@uwm.edu',
-                                                phone='202-555-0190', address='abc120', officeHours="Always",
+                                                phone='202-555-0191', address='abc120', officeHours="Always",
                                                 role="TA")
         self.cs361 = Course.objects.create(id='361', name='Intro to Software Engineering', number='CS361',
                                            instructor=None)

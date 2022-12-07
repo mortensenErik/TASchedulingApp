@@ -6,7 +6,7 @@ class testEditAccount(TestCase):
     def setUp(self):
         self.monkey = Client()
         self.paul = UserProfile.objects.create(name='Paul', id='paulie', password='dietcoke', email='paulie@uwm.edu',
-                                               phone='202-555-0199', address='abc129', officeHours="Never!",
+                                               phone='202-555-0198', address='abc129', officeHours="Never!",
                                                role="Instructor")
 
     def testEditAccount(self):
