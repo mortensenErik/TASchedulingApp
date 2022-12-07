@@ -24,26 +24,26 @@ class SectionClass:
     #     return True
 
     @staticmethod
-    def getSectionById(id):
+    def getSectionById(SectionId):
         if id:
-            if UserProfile.objects.filter(id=id).exists():
-                return UserProfile.objects.get(id=id)
+            if Section.objects.filter(SectionId=SectionId).exists():
+                return Section.objects.get(SectionId=SectionId)
             else:
                 return None
         raise TypeError("No parameter provided!")
 
     @staticmethod
-    def createSection(id,course, faculty, number, type):
+    def createSection(SectionId,course, faculty, number, type):
         print('in createSection')
-        if SectionClass.getSectionById(id=id) is None:
-            Section.objects.create(id=id, course=course, faculty=faculty, number=number, type=type)
+        if SectionClass.getSectionById(SectionId=SectionId) is None:
+            Section.objects.create(SectionId=SectionId, course=course, faculty=faculty, number=number, type=type)
             return True
         else:
             return False
 
     @staticmethod
-    def deleteSection(id):
+    def deleteSection(SectionId):
         if id:
-            SectionClass.getSectionById(id=id).delete()
+            SectionClass.getSectionById(SectionId=SectionId).delete()
         else:
             raise TypeError("No parameter provided!")

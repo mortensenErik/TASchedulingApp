@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 
 
 class Course(models.Model):
-    id = models.CharField(max_length=20, primary_key=True)
+    CourseId = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50, unique=True)
     number = models.CharField(max_length=4,unique=True)
     subject = models.CharField(max_length=10, null=True)
@@ -27,7 +27,7 @@ class Course(models.Model):
 
 
 class Section(models.Model):
-    id = models.CharField(max_length=20, primary_key=True)
+    SectionId = models.CharField(max_length=20, primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     faculty = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
     number = models.IntegerField(default=0)

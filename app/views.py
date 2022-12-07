@@ -80,13 +80,14 @@ class CreateSection(View):
     def get(request):
         return render(request, "createSection.html", {'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
 
+
     def post(self, request):
         sectionCourse = CourseClass.getCourseById(request.POST["course"])
         sectionFaculty = User.getUserByEmail(request.POST["faculty"])
         creation = SectionClass.createSection(
-            id=request.POST["id"],
+            id=request.POST["SectionId"],
             course=sectionCourse,
-            faculty= sectionFaculty,
+            faculty=sectionFaculty,
             number=int(request.POST["number"]),
             type=request.POST["type"],
         )
@@ -109,7 +110,8 @@ class Users(View):
     def get(request):
         return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
 
-    def post(self, request, email):
+    @staticmethod
+    def post(request, email):
         User.deleteUser(email)
         return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
 
@@ -118,7 +120,10 @@ class Sections(View):
     def get(request):
         return render(request, "viewSections.html", {"sections": Section.objects.all()})
 
-
+    @staticmethod
+    def post(request, SectionId):
+        SectionClass.deleteSection(SectionId)
+        return render(request, "viewSections.html", {"sections": Section.objects.all()})
 
 class Courses(View):
     @staticmethod
