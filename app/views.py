@@ -82,10 +82,11 @@ class CreateSection(View):
 
 
     def post(self, request):
-        sectionCourse = CourseClass.getCourseById(request.POST["course"])
+        print("request.POST['course']:" + request.POST["course"])
+        sectionCourse = CourseClass.getCourseById(CourseId=request.POST["course"])
         sectionFaculty = User.getUserByEmail(request.POST["faculty"])
         creation = SectionClass.createSection(
-            id=request.POST["SectionId"],
+            SectionId=request.POST["SectionId"],
             course=sectionCourse,
             faculty=sectionFaculty,
             number=int(request.POST["number"]),

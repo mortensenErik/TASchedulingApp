@@ -5,10 +5,10 @@ from app.models import Course
 class CourseClass:
 
     @staticmethod
-    def getCourseById(id):
-        if id:
-            if Course.objects.filter(id=id).exists():
-                return Course.objects.get(id=id)
+    def getCourseById(CourseId):
+        if CourseId:
+            if Course.objects.filter(CourseId=CourseId).exists():
+                return Course.objects.get(CourseId=CourseId)
             else:
                 return None
         raise TypeError("No parameter provided!")
