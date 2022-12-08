@@ -28,6 +28,10 @@ class CourseClass:
         else:
             raise TypeError("No parameter provided!")
 
+    @staticmethod
+    def editCourse(CourseId, name, subject, number):
+        pass
+
 
 # class ErrorString:
 #

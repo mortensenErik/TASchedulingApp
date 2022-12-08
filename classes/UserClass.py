@@ -27,6 +27,9 @@ class User:
         else:
             raise TypeError("No parameter provided!")
 
+    @staticmethod
+    def editUser(id,email, name, password, phone, address, role):
+        pass
 
 
 

@@ -47,3 +47,7 @@ class SectionClass:
             SectionClass.getSectionById(SectionId=SectionId).delete()
         else:
             raise TypeError("No parameter provided!")
+
+    @staticmethod
+    def editSection(SectionId,course, faculty, number, type):
+        pass
