@@ -62,9 +62,10 @@
             {% for i in courses %}
                 <tr>
                     <td>
-                        <span style="text-align: start">
-                            <button STYLE="color:white; background: darkred"> - </button>
-                        </span>
+                    <form style="text-align: start" action="/courses/{{ i.CourseId }}/" method="post">
+                            {% csrf_token %}
+                            <button type="submit" STYLE="color:white; background: darkred"> - </button>
+                    </form>
                         {{ i.subject }} {{ i.number }}
                     </td>
                     <td>{{ i.name }}</td>

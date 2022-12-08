@@ -17,7 +17,7 @@ urlpatterns = [
     path('users/', Users.as_view()),
     path('users/<str:email>/', Users.as_view()),
     path('courses/', Courses.as_view()),
-    path('courses/<str:id>/', Courses.as_view()),
+    path('courses/<str:CourseId>/', Courses.as_view()),
     path('sections/', Sections.as_view()),
     path('sections/<str:SectionId>/', Sections.as_view()),
     path('notifications/', Notifications.as_view()),

@@ -74,13 +74,30 @@ class CreateCourse(View):
     def get(request):
         return render(request, "createCourse.html")
 
+    @staticmethod
+    def post(request):
+        creation = CourseClass.createCourse(
+            CourseId=request.POST["CourseId"],
+            name=request.POST["name"],
+            subject=request.POST["subject"],
+            number=int(request.POST["number"])
+        )
+        if creation:
+            print('creation is true')
+            return redirect('/courses')
+        else:
+            print('creation is false')
+            return render(request, "createCourse.html")
+
+
 
 class CreateSection(View):
     @staticmethod
     def get(request):
         return render(request, "createSection.html", {'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         course = CourseClass.getCourseById(CourseId=request.POST["course"])
         faculty = None
         if request.POST["faculty"]:
@@ -97,7 +114,7 @@ class CreateSection(View):
             return redirect('/sections')
         else:
             print('creation is false')
-            return render(request, "createUser.html")
+            return render(request, "createCourse.html")
 
 
 class Profile(View):
@@ -131,6 +148,11 @@ class Courses(View):
     @staticmethod
     def get(request):
         return render(request, "viewCourses.html", {"courses": Course.objects.all()})
+
+    @staticmethod
+    def post(request, CourseId):
+        CourseClass.deleteCourse(CourseId)
+        return redirect('/courses')
 
 class EditUser(View):
     @staticmethod

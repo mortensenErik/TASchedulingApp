@@ -13,6 +13,22 @@ class CourseClass:
                 return None
         raise TypeError("No parameter provided!")
 
+    @staticmethod
+    def createCourse(CourseId, name, subject, number):
+        if CourseClass.getCourseById(CourseId=CourseId) is None:
+            Course.objects.create(CourseId=CourseId, name=name, subject=subject, number=number)
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def deleteCourse(CourseId):
+        if id:
+            CourseClass.getCourseById(CourseId=CourseId).delete()
+        else:
+            raise TypeError("No parameter provided!")
+
+
 # class ErrorString:
 #
 #     def __init__(self, id, name, instructor, number, sections):

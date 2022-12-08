@@ -19,11 +19,11 @@ class UserProfile(models.Model):
 class Course(models.Model):
     CourseId = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50, unique=True)
-    number = models.CharField(max_length=4,unique=True)
+    number = models.IntegerField(default=0)
     subject = models.CharField(max_length=10, null=True)
 
     def __str__(self):
-        return self.subject + " " + self.number + ": " + self.name
+        return self.subject + " " + self.number.__str__() + ": " + self.name
 
 
 class Section(models.Model):
