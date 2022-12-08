@@ -8,6 +8,7 @@ urlpatterns = [
     path('', Login.as_view()),
     path('home/', Home.as_view()),
     path('profile/', Profile.as_view()),
+    path('profile/<int:editing>', Profile.as_view()),
     path('new_user/', CreateUser.as_view()),
     path('new_course/', CreateCourse.as_view()),
     path('new_section/', CreateSection.as_view()),

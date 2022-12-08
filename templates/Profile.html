@@ -40,26 +40,58 @@
 <div class="container-fluid" style="text-align:left">
     <div class="row">
         <h1>This is the profile page for {{ user.name }}</h1>
-        <ul>
-            <li>
-                <p> ID: {{ user.id }}</p>
-            </li>
-            <li>
-                <p> Name: {{ user.name }}</p>
-            </li>
-            <li>
-                <p> Email: {{ user.email }}</p>
-            </li>
-            <li>
-                <p> Phone: {{ user.phone }}</p>
-            </li>
-            <li>
-                <p> Address: {{ user.address }}</p>
-            </li>
-            <li>
-                <p> Role: {{ user.role }}</p>
-            </li>
-        </ul>
+        <form action="/profile/{{ 1 }}" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            {% if editing == 1 %}
+                editing
+            {% else %}
+                ID: {{ user.id }}
+            {% endif %}
+        </form>
+        <form action="/courses/{{ i.CourseId }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            name: {{ user.name }}
+        </form>
+        <form action="/courses/{{ i.CourseId }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            Email: {{ user.email }}
+        </form>
+        <form action="/courses/{{ i.CourseId }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            Phone: {{ user.phone }}
+        </form>
+        <form action="/courses/{{ i.CourseId }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            Address: {{ user.address }}
+        </form>
+        <form action="/courses/{{ i.CourseId }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" STYLE="color:white; background: goldenrod">
+                {% load bootstrap_icons %}
+                {% bs_icon 'pencil' %}
+            </button>
+            Role: {{ user.role }}
+        </form>
     </div>
 </div>
 

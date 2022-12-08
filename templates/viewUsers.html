@@ -68,8 +68,8 @@
                         <form style="text-align: start" action="/users/{{ i.email }}/" method="post">
                             {% csrf_token %}
                             <button type="submit" STYLE="color:white; background: darkred"> - </button>
+                            {{ i.name }}
                         </form>
-                        {{ i.name }}
                     </td>
                     <td>{{ i.role }}</td>
                     <td>{{ i.email }}</td>

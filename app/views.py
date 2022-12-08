@@ -120,6 +120,14 @@ class CreateSection(View):
 class Profile(View):
     @staticmethod
     def get(request):
+        print("It came back here")
+        return render(request, "Profile.html",
+                      {"user": User.getUserByEmail(request.session["email"])})
+
+    @staticmethod
+    def post(request, editing):
+        print("editing: ", editing)
+        request.session["editing"] = editing
         return render(request, "Profile.html",
                       {"user": User.getUserByEmail(request.session["email"])})
 

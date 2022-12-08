@@ -63,10 +63,10 @@
                 <tr>
                     <td>
                     <form style="text-align: start" action="/courses/{{ i.CourseId }}/" method="post">
-                            {% csrf_token %}
-                            <button type="submit" STYLE="color:white; background: darkred"> - </button>
-                    </form>
+                        {% csrf_token %}
+                        <button type="submit" STYLE="color:white; background: darkred"> - </button>
                         {{ i.subject }} {{ i.number }}
+                    </form>
                     </td>
                     <td>{{ i.name }}</td>
                     <td>

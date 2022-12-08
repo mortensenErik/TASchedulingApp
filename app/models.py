@@ -15,6 +15,9 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.role + ": " + self.name
 
+    def get_model_fields(model):
+        return model._meta.fields
+
 
 class Course(models.Model):
     CourseId = models.CharField(max_length=20, primary_key=True)
@@ -34,5 +37,5 @@ class Section(models.Model):
     type = models.CharField(max_length=3, choices=[('LEC', 'lecture'), ('LAB', 'lab')])
 
     def __str__(self):
-        return self.type+ ": " + self.course.number + "-" + self.number.__str__()
+        return self.type + ": " + self.course.number.__str__() + "-" + self.number.__str__()
 

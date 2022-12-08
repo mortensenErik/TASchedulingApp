@@ -67,8 +67,9 @@
                     <form style="text-align: start" action="/sections/{{ i.SectionId }}/" method="post">
                             {% csrf_token %}
                             <button type="submit" STYLE="color:white; background: darkred"> - </button>
+                        {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}
                     </form>
-                    {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}</td>
+                </td>
                 <td>{{ i.course.name }}</td>
                 <td>{{ i.type }}</td>
                 <td>
