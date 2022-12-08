@@ -72,6 +72,7 @@
             <label class="control-label col-sm-5">Faculty: </label>
             <div class="col-sm-3">
                 <select class="form-control" name="faculty" id="faculty">
+                <option value={{ null }}>None</option>
                  {% for user in users %}
                      {% if user.role == "TA" or user.role == "INSTRUCTOR" %}
                          <option value={{ user.email }}>{{ user.name }}</option>

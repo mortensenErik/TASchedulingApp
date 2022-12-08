@@ -64,7 +64,7 @@ class CreateUser(View):
         )
         if creation:
             print('creation is true')
-            return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
+            return redirect('/users')
         else:
             print('creation is false')
             return render(request, "createUser.html")
@@ -80,24 +80,25 @@ class CreateSection(View):
     def get(request):
         return render(request, "createSection.html", {'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
 
-
     def post(self, request):
-        print("request.POST['course']:" + request.POST["course"])
-        sectionCourse = CourseClass.getCourseById(CourseId=request.POST["course"])
-        sectionFaculty = User.getUserByEmail(request.POST["faculty"])
+        course = CourseClass.getCourseById(CourseId=request.POST["course"])
+        faculty = None
+        if request.POST["faculty"]:
+            faculty = User.getUserByEmail(request.POST["faculty"])
         creation = SectionClass.createSection(
             SectionId=request.POST["SectionId"],
-            course=sectionCourse,
-            faculty=sectionFaculty,
+            course=course,
+            faculty=faculty,
             number=int(request.POST["number"]),
             type=request.POST["type"],
         )
         if creation:
             print('creation is true')
-            return render(request, "viewSections.html", {"sections": Section.objects.all()})
+            return redirect('/sections')
         else:
             print('creation is false')
             return render(request, "createUser.html")
+
 
 class Profile(View):
     @staticmethod
@@ -114,7 +115,7 @@ class Users(View):
     @staticmethod
     def post(request, email):
         User.deleteUser(email)
-        return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
+        return redirect('/users')
 
 class Sections(View):
     @staticmethod
@@ -124,7 +125,7 @@ class Sections(View):
     @staticmethod
     def post(request, SectionId):
         SectionClass.deleteSection(SectionId)
-        return render(request, "viewSections.html", {"sections": Section.objects.all()})
+        return redirect('/sections')
 
 class Courses(View):
     @staticmethod
