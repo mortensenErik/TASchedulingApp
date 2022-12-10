@@ -9,58 +9,60 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+    <div class="container-fluid">
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/home/" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Log Out">
+        </form>
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="My Account">
+        </form>
+         <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+      <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
+        <form class="navbar-form navbar-right" action="/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Home">
+        </form>
     </div>
-    <form class="navbar-form navbar-right" action="/Profile/" method="get">
-        <input class="btn btn-warning" type="submit" value="My Account">
-    </form>
-    <form class="navbar-form navbar-right" action="/Login/" method="post">
-        {% csrf_token %}
-        <input class="btn btn-warning" type="submit" value="Log Out">
-    </form>
-  </div>
 </nav>
 
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Edit Profile</h1>
-    <form class="form-horizontal" action="/editProfile/" method="post">
+    <form class="form-horizontal" action="/edit_profile/" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <label class="control-label col-sm-5">Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{name}} id="name" name="name"></div>
+            <label class="control-label col-sm-5">UWM Email:</label>
+            <div class="col-sm-3"><input class="form-control" value="{{ user.email }}" type="text" id="email" name="email"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Password:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{password}} id="password" name="password"></div>
+            <label class="control-label col-sm-5">Name:</label>
+            <div class="col-sm-3"><input class="form-control" value="{{ user.name }}" type="text" id="name" name="name"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Office Phone:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{phone}} id="phone" name="phone"></div>
+            <div class="col-sm-3"><input class="form-control" value="{{ user.phone }}" type="text" id="phone" name="phone"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Office Address:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{address}} id="address" name="address"></div>
+            <div class="col-sm-3"><input class="form-control" value="{{ user.address }}" type="text" id="address" name="address"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Office Hours:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{officeHours}} id="officeHours" name="officeHours"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">Role:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{role}} id="role" name="role"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">UWM Email:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{email}} id="email" name="email"></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-5">Delete Account:</label>
-            <div class="col-sm-3"><input class="form-control" type="checkbox" id="delete" name="delete"></div>
-        </div>
-        <div class="form-group">
-            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Save"></div>
+            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit"></div>
         </div>
     </form>
 </div>

@@ -38,61 +38,23 @@
 </nav>
 
 <div class="container-fluid" style="text-align:left">
-    <div class="row">
-        <h1>This is the profile page for {{ user.name }}</h1>
-        <form action="/profile/{{ 1 }}" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            {% if editing == 1 %}
-                editing
-            {% else %}
-                ID: {{ user.id }}
-            {% endif %}
-        </form>
-        <form action="/courses/{{ i.CourseId }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            name: {{ user.name }}
-        </form>
-        <form action="/courses/{{ i.CourseId }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            Email: {{ user.email }}
-        </form>
-        <form action="/courses/{{ i.CourseId }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            Phone: {{ user.phone }}
-        </form>
-        <form action="/courses/{{ i.CourseId }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            Address: {{ user.address }}
-        </form>
-        <form action="/courses/{{ i.CourseId }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" STYLE="color:white; background: goldenrod">
-                {% load bootstrap_icons %}
-                {% bs_icon 'pencil' %}
-            </button>
-            Role: {{ user.role }}
-        </form>
+    <h1 style="text-align: center">This is the profile page for {{ user.name }}</h1>
+    <div class="row" style="text-align: center">
+        <p>ID: {{ user.id }}</p>
+        <p>name: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone: {{ user.phone }}</p>
+        <p>Address: {{ user.address }}</p>
+        <p>Role: {{ user.role }}</p>
     </div>
+    <form action="/edit_profile/" method="get" style="text-align: center">
+        {% csrf_token %}
+        <label>Edit my contact information: </label>
+        <button type="submit" STYLE="color:white; background: goldenrod">
+            {% load bootstrap_icons %}
+            {% bs_icon 'pencil' %}
+        </button>
+    </form>
 </div>
 
 </body>

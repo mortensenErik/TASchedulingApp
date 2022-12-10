@@ -132,6 +132,23 @@ class Profile(View):
                       {"user": User.getUserByEmail(request.session["email"])})
 
 
+class EditProfile(View):
+
+    @staticmethod
+    def get(request):
+        return render(request, "editProfile.html", {"user": User.getUserByEmail(request.session["email"])})
+
+    @staticmethod
+    def post(request):
+        User.editUser(
+            name=request.POST['name'],
+            email=request.POST['email'],
+            address=request.POST['address'],
+            phone=request.POST['phone'],
+        )
+        return redirect('/profile/')
+
+
 class Users(View):
     @staticmethod
     def get(request):
