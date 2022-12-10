@@ -37,3 +37,9 @@ class UserUnitTests(TestCase):
         self.assertEqual(len(list(UserProfile.objects), 4))
         admin_list = list(UserProfile.objects.filter(name='Nigel'))
         self.assertEqual(len(admin_list), 0)
+        
+    def test_create_user(self):
+        test = UserProfile.objects.create(id="tryin", name="Jerry", password="none", phone="414-555-5555", address="test",
+                                          role="TA", email="jerr@uwm.edu")
+        lookup = list(UserProfile.objects.all())
+        self.assertEqual(len(lookup), 5, msg="Error: unable to create user")
