@@ -30,7 +30,18 @@ class CourseClass:
 
     @staticmethod
     def editCourse(CourseId, name, subject, number):
-        pass
+        if CourseId:
+            current_course = CourseClass.getCourseById(CourseId)
+            if current_course:
+                current_course.CourseId = CourseId
+                current_course.name = name
+                current_course.subject = subject
+                current_course.number = number
+                current_course.save()
+            else:
+                raise ValueError("This course does not exist!")
+        else:
+            raise TypeError("No parameter")
 
 
 # class ErrorString:

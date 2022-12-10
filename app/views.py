@@ -184,8 +184,20 @@ class EditUser(View):
 
 class EditCourse(View):
     @staticmethod
-    def get(request):
-        return render(request, "editCourse.html")
+    def get(request, CourseId):
+        course_to_edit = CourseClass.getCourseById(CourseId)
+        return render(request, "editCourse.html", {'course': course_to_edit})
+
+    @staticmethod
+    def post(request):
+        CourseClass.editCourse(
+            CourseId=request.POST['CourseId'],
+            name=request.POST['name'],
+            subject=request.POST['subject'],
+            number=request.POST['number']
+        )
+        return redirect('/courses/')
+
 
 
 class EditSection(View):
