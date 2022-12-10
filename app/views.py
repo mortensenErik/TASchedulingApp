@@ -164,8 +164,22 @@ class Courses(View):
 
 class EditUser(View):
     @staticmethod
-    def get(request):
-        return render(request, "editProfile.html")
+    def get(request, email):
+        user_to_edit = User.getUserByEmail(email)
+        return render(request, "editUser.html",  {"user": user_to_edit})
+
+    @staticmethod
+    def post(request):
+        User.editUser(
+            id=request.POST["id"],
+            email=request.POST["email"],
+            name=request.POST["name"],
+            password=request.POST["password"],
+            role=request.POST.get('role', False),
+            address=request.POST["address"],
+            phone=request.POST["phone"]
+        )
+        return redirect('/users/')
 
 
 class EditCourse(View):
