@@ -140,7 +140,7 @@ class EditProfile(View):
 
     @staticmethod
     def post(request):
-        User.editUser(
+        User.editProfileInfo(
             name=request.POST['name'],
             email=request.POST['email'],
             address=request.POST['address'],

@@ -28,7 +28,7 @@ class User:
             raise TypeError("No parameter provided!")
 
     @staticmethod
-    def editUser(email, name, phone, address):
+    def editProfileInfo(email, name, phone, address):
         if email:
             current_user = User.getUserByEmail(email)
             if current_user:
