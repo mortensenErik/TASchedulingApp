@@ -194,7 +194,7 @@ class EditCourse(View):
             CourseId=request.POST['CourseId'],
             name=request.POST['name'],
             subject=request.POST['subject'],
-            number=request.POST['number']
+            number=request.POST['number'],
         )
         return redirect('/courses/')
 
@@ -202,8 +202,24 @@ class EditCourse(View):
 
 class EditSection(View):
     @staticmethod
-    def get(request):
-        return render(request, "editSection.html")
+    def get(request, SectionId):
+        current_section = SectionClass.getSectionById(SectionId)
+        return render(request, "editSection.html",
+                      {"section": current_section, 'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
+
+    @staticmethod
+    def post(request):
+        faculty = False
+        if request.POST.get('faculty', False):
+            faculty = User.getUserByEmail('faculty')
+        SectionClass.editSection(
+            SectionId=request.POST['SectionId'],
+            course=request.POST.get('course', False),
+            number=request.POST['number'],
+            faculty=request.POST.get('faculty', False),
+            type=request.POST.get('type', False)
+        )
+        return redirect('/sections/')
 
 
 class Notifications(View):

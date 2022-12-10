@@ -49,5 +49,20 @@ class SectionClass:
             raise TypeError("No parameter provided!")
 
     @staticmethod
-    def editSection(SectionId,course, faculty, number, type):
-        pass
+    def editSection(SectionId, course, faculty, number, type):
+        if SectionId:
+            current_section = SectionClass.getSectionById(SectionId)
+            if current_section:
+                current_section.SectionId = SectionId
+                if course:
+                    current_section.course = course
+                if faculty:
+                    current_section.faculty = faculty
+                current_section.number = number
+                if type:
+                    current_section.type = type
+                current_section.save()
+            else:
+                raise ValueError('This section does not exist')
+        else:
+            raise TypeError("Id is not valid")
