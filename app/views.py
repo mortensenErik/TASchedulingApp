@@ -23,15 +23,13 @@ class Login(View):
     @staticmethod
     def post(request):
         user = User.getUserByEmail(request.POST["email"])
-        if user is None:
-            return render(request, "Login.html", {"error": "User does not exist"})
+        if user is None or user.password != request.POST["password"]:
+            return render(request, "Login.html", {"error": "Username/password is incorrect"})
+
         else:
-            if user.password != request.POST["password"]:
-                return render(request, "login.html", {"error": "Incorrect Password"})
-            else:
-                request.session["email"] = user.email
-                request.session["role"] = user.role
-                return redirect('home/')
+            request.session["email"] = user.email
+            request.session["role"] = user.role
+            return redirect('home/')
 
 
 
