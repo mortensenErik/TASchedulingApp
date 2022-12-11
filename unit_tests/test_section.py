@@ -22,6 +22,6 @@ class CreateSectionTest(TestCase):
         self.assertEqual(len(lookup), 3, msg="Error: unable to create section")
 
     def test_section_deleted(self):
-        test = SectionClass.deleteSection(SectionId="14", course=self.CS250, faculty=self.sorenson, number="805", type="LAB")
+        test = SectionClass.deleteSection(SectionId="14")
         lookup = list(Section.objects.all())
         self.assertEqual(len(lookup), 1, msg="Error: unable to delete section")
