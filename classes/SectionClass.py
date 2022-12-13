@@ -5,23 +5,6 @@ from app.models import UserProfile
 
 
 class SectionClass:
-    # def __init__(self, message):
-    #     self.__message = message
-    #
-    # def __str__(self):
-    #     return self.__message
-    #
-    # def __bool__(self):
-    #     return False
-    #
-    # def verify_dict(needed: list[(str, type)], toVerify: dict) -> Union[ErrorString, bool]:
-    #     for i in needed:
-    #         if not toVerify.get(i[0]):
-    #             return ErrorString("Error: " + i[0] + " was not provided")
-    #         if type(toVerify[i[0]]) is not i[1]:
-    #             return ErrorString("Error: invalid datatype for " + i[0])
-    #
-    #     return True
 
     @staticmethod
     def getSectionById(SectionId):
@@ -31,13 +14,24 @@ class SectionClass:
             else:
                 return None
         raise TypeError("No parameter provided!")
+        
+    def getSectionByNumber(number):
+        if id:
+            if Section.objects.filter(number=number).exists():
+                return Section.objects.get(number=number)
+            else:
+                return None
+        raise TypeError("No parameter provided!")
 
     @staticmethod
     def createSection(SectionId,course, faculty, number, type):
         print('in createSection')
         if SectionClass.getSectionById(SectionId=SectionId) is None:
-            Section.objects.create(SectionId=SectionId, course=course, faculty=faculty, number=number, type=type)
-            return True
+            if SectionClass.getSectionByNumber(number=number):
+                return False
+            else:
+                Section.objects.create(SectionId=SectionId, course=course, faculty=faculty, number=number, type=type)
+                return True
         else:
             return False
 
