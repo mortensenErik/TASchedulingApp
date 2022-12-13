@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Confirm Delete</title>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
+        <div class="navbar-header">
+            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+        </div>
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="My Account">
+        </form>
+        <form class="navbar-form navbar-right" action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Log Out">
+        </form>
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Courses">
+        </form>
+        <form class="navbar-form navbar-right" action="/sections/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="col-sm-12" style="text-align: center">
+        <h1>Are you sure you want to delete {{ course.name }}?</h1>
+    </div>
+    <div class="row">
+        <div class="align-middle col-sm-offset-5 col-sm-1">
+            <form class="form-horizontal" action="/courses/" method="get">
+                {% csrf_token %}
+                <div class="form-group">
+                    <button class="btn btn-default btn-lg" type="submit" id="cancel" name="cancel">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="align-middle col-sm-1">
+        <form class="form-horizontal" action="/courses/{{ course.CourseId }}/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <button class="btn btn-danger btn-lg" type="submit" id="deleteCourse" name="deleteCourse">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Delete
+                </button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

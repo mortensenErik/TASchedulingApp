@@ -201,3 +201,18 @@ class Notifications(View):
     @staticmethod
     def get(request):
         return render(request, "sendNotifications.html")
+
+class confirmDeleteUser(View):
+    @staticmethod
+    def get(request, userID):
+        return render(request, "confirmDeleteUser.html", {"user": UserProfile.objects.filter(id=userID).first()})
+
+class confirmDeleteCourse(View):
+    @staticmethod
+    def get(request, courseID):
+        return render(request, "confirmDeleteCourse.html", {"course": Course.objects.filter(CourseId=courseID).first()})
+
+class confirmDeleteSection(View):
+    @staticmethod
+    def get(request, sectionID):
+            return render(request, "confirmDeleteSection.html", {"section": Section.objects.filter(SectionId=sectionID).first()})
