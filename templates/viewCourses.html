@@ -62,7 +62,7 @@
             {% for i in courses %}
                 <tr>
                     <td>
-                    <form style="text-align: start" action="/courses/{{ i.CourseId }}/" method="post">
+                    <form style="text-align: start" action="/confirmDeleteCourse/{{ i.CourseId }}/" method="get">
                         {% csrf_token %}
                         <button type="submit" STYLE="color:white; background: darkred"> - </button>
                         {{ i.subject }} {{ i.number }}

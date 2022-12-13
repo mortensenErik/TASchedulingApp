@@ -23,7 +23,9 @@ urlpatterns = [
     path('sections/', Sections.as_view()),
     path('sections/<str:SectionId>/', Sections.as_view()),
     path('notifications/', Notifications.as_view()),
-    path('confirmDeleteUser/<str:userID>/', confirmDeleteUser.as_view(), name="confirmDeleteUser")
+    path('confirmDeleteUser/<str:userID>/', confirmDeleteUser.as_view(), name="confirmDeleteUser"),
+    path('confirmDeleteCourse/<str:courseID>/', confirmDeleteCourse.as_view(), name="confirmDeleteCourse"),
+    path('confirmDeleteSection/<str:sectionID>/', confirmDeleteSection.as_view(), name="confirmDeleteSection")
 ]
 
 urlpatterns += staticfiles_urlpatterns()
