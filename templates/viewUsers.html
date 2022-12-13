@@ -65,7 +65,7 @@
             {% for i in users %}
                 <tr>
                     <td style="text-align: left">
-                        <form style="text-align: start" action="/users/{{ i.email }}/" method="post">
+                        <form style="text-align: start" action="/confirmDeleteUser/{{ i.id }}" method="get">
                             {% csrf_token %}
                             <button type="submit" STYLE="color:white; background: darkred"> - </button>
                             {{ i.name }}

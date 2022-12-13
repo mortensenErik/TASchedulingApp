@@ -23,6 +23,7 @@ urlpatterns = [
     path('sections/', Sections.as_view()),
     path('sections/<str:SectionId>/', Sections.as_view()),
     path('notifications/', Notifications.as_view()),
+    path('confirmDeleteUser/<str:userID>/', confirmDeleteUser.as_view(), name="confirmDeleteUser")
 ]
 
 urlpatterns += staticfiles_urlpatterns()

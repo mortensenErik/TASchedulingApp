@@ -201,3 +201,8 @@ class Notifications(View):
     @staticmethod
     def get(request):
         return render(request, "sendNotifications.html")
+
+class confirmDeleteUser(View):
+    @staticmethod
+    def get(request, userID):
+        return render(request, "confirmDeleteUser.html", {"user": UserProfile.objects.filter(id=userID).first()})

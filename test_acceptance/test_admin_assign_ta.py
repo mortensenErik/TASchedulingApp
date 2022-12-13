@@ -16,6 +16,6 @@ class testAdminAssignTA(TestCase):
                                                number="801")
 
     def testAssignTA(self):
-        self.monkey.get("/editSection/", {"sectionNumber": "361-801", "teacher": "", "sectionType": "Lab"})
-        self.monkey.post("/editSection/", {"teacher": "frankf@uwm.edu"})
+        self.monkey.get("edit_section", {"sectionNumber": "361-801", "teacher": "", "sectionType": "Lab"})
+        self.monkey.post("edit_section", {"teacher": "frankf@uwm.edu"})
         self.assertEqual(self.cs361Lab.faculty, self.frank, msg="TA not assigned to course")
