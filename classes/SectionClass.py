@@ -32,6 +32,7 @@ class SectionClass:
                 return None
         raise TypeError("No parameter provided!")
 
+
     @staticmethod
     def createSection(SectionId,course, faculty, number, type):
         print('in createSection')
@@ -40,6 +41,7 @@ class SectionClass:
             return True
         else:
             return False
+
 
     @staticmethod
     def deleteSection(SectionId):
@@ -51,3 +53,4 @@ class SectionClass:
     @staticmethod
     def editSection(SectionId,course, faculty, number, type):
         pass
+

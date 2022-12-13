@@ -106,4 +106,11 @@ class UserUnitTests(TestCase):
         with self.assertRaises(TypeError) as context:
             User.getUserByEmail()
 
+class Useredittest(TestCase):
 
+    def setUp(self):
+        pass
+
+
+    def test_editedthing(self):
+        pass
