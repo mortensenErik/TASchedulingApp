@@ -11,6 +11,8 @@ class testDeleteAccount(TestCase):
                                                 role="TA")
 
     def testDeleteAccount(self):
-        self.monkey.get("/confirmDeleteUser/frankf")
-        self.monkey.post("/users/frankf@uwm.edu")
+        self.monkey.session["email"] = self.nigel.email
+        self.monkey.session["role"] = self.nigel.role
+        self.monkey.get("/confirmDeleteUser/frankf/")
+        self.monkey.post("/users/frankf@uwm.edu/")
         self.assertEqual(len(UserProfile.objects.filter(id="frankf")), 0, msg="User was not deleted")
