@@ -24,16 +24,18 @@ class SectionClass:
         raise TypeError("No parameter provided!")
 
     @staticmethod
-    def createSection(SectionId,course, faculty, number, type):
-        print('in createSection')
-        if SectionClass.getSectionById(SectionId=SectionId) is None:
-            if SectionClass.getSectionByNumber(number=number):
-                return False
-            else:
-                Section.objects.create(SectionId=SectionId, course=course, faculty=faculty, number=number, type=type)
-                return True
-        else:
-            return False
+    def createSection(course, faculty, number, type):
+        Section.objects.create(course=course, faculty=faculty, number=number, type=type)
+        return True
+        # print('in createSection')
+        # if SectionClass.getSectionById(SectionId=SectionId) is None:
+        #     if SectionClass.getSectionByNumber(number=number):
+        #         return False
+        #     else:
+        #
+        #         return True
+        # else:
+        #     return False
 
     @staticmethod
     def deleteSection(SectionId):

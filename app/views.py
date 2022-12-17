@@ -54,7 +54,7 @@ class CreateUser(View):
 
     def post(self, request):
         creation = User.createUser(
-            id= request.POST["id"],
+            # id= request.POST["id"],
             email=request.POST["email"],
             name=request.POST["name"],
             password=request.POST["password"],
@@ -77,7 +77,7 @@ class CreateCourse(View):
     @staticmethod
     def post(request):
         creation = CourseClass.createCourse(
-            CourseId=request.POST["CourseId"],
+            # CourseId=request.POST["CourseId"],
             name=request.POST["name"],
             subject=request.POST["subject"],
             number=int(request.POST["number"])
@@ -102,8 +102,9 @@ class CreateSection(View):
         faculty = None
         if request.POST["faculty"]:
             faculty = User.getUserByEmail(request.POST["faculty"])
+            print('FACULTY')
+            print(faculty)
         creation = SectionClass.createSection(
-            SectionId=request.POST["SectionId"],
             course=course,
             faculty=faculty,
             number=int(request.POST["number"]),
