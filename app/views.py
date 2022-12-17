@@ -33,7 +33,7 @@ class Login(View):
             else:
                 request.session["email"] = user.email
                 request.session["role"] = user.role
-                login(request, user)
+                request.session['userId'] = user.id
                 return redirect('home/')
 
 
@@ -91,7 +91,6 @@ class CreateCourse(View):
         else:
             print('creation is false')
             return render(request, "createCourse.html")
-
 
 
 class CreateSection(View):
@@ -235,8 +234,11 @@ class EditSection(View):
         number = request.POST['number']
         section.number = number
         if facultyId:
-            faculty = UserProfile.objects.get(id=facultyId)
-            section.faculty = faculty
+            if facultyId == 'None':
+                section.faculty = None
+            else:
+                faculty = UserProfile.objects.get(id=facultyId)
+                section.faculty = faculty
         if courseId:
             course = Course.objects.get(CourseId=courseId)
             section.course = course
@@ -251,17 +253,36 @@ class Notifications(View):
     def get(request):
         return render(request, "sendNotifications.html")
 
+
 class confirmDeleteUser(View):
     @staticmethod
     def get(request, userID):
         return render(request, "confirmDeleteUser.html", {"user": UserProfile.objects.filter(id=userID).first()})
+
 
 class confirmDeleteCourse(View):
     @staticmethod
     def get(request, courseID):
         return render(request, "confirmDeleteCourse.html", {"course": Course.objects.filter(CourseId=courseID).first()})
 
+
 class confirmDeleteSection(View):
     @staticmethod
     def get(request, sectionID):
             return render(request, "confirmDeleteSection.html", {"section": Section.objects.filter(SectionId=sectionID).first()})
+
+
+class assignTA(View):
+    @staticmethod
+    def get(request, id):
+        user = UserProfile.objects.get(id=id)
+        sections = Section.objects.filter(faculty=None)
+        length = len(sections)
+        return render(request, "assignTA.html", {"user": user, "sections": sections, "length": length})
+
+    @staticmethod
+    def post(request, id):
+        section = Section.objects.get(SectionId=request.POST['section'])
+        section.faculty = UserProfile.objects.get(id=id)
+        section.save()
+        return redirect('/home/')

@@ -39,7 +39,11 @@
 
 <div class="container-fluid" style="text-align:center">
     <div>
-        <h1>Current assignments: </h1>
+        <div>
+            <h1>You are a{% if request.session.role is not 'TA' %}n{% endif %}
+                : {{ request.session.role }}</h1>
+        </div>
+        <h1>Current TA assignments</h1>
         <table class="table table-bordered table-hover">
             <thead>
             <th style="text-align: center">TA:</th>
@@ -62,6 +66,13 @@
                             <p>This TA is not assigned to anything.</p>
                         {% endif %}
                     </table>
+                    <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
+                                    {% csrf_token %}
+                                    <button type="submit" STYLE="color:white; background: forestgreen">
+                                        {% load bootstrap_icons %}
+                                        {% bs_icon 'plus' %}
+                                    </button>
+                    </form>
                 </td>
                 </tr>
                 {% endif %}
