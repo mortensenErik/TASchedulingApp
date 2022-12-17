@@ -59,16 +59,13 @@
             <th>Course:</th>
             <th>Section Type:</th>
             <th>Faculty:</th>
+            <th></th>
         </thead>
         <tbody>
             {% for i in sections %}
             <tr>
                 <td>
-                    <form style="text-align: start" action="/confirmDeleteSection/{{ i.SectionId }}/" method="get">
-                            {% csrf_token %}
-                            <button type="submit" STYLE="color:white; background: darkred"> - </button>
-                        {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}
-                    </form>
+                     {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}
                 </td>
                 <td>{{ i.course.name }}</td>
                 <td>{{ i.type }}</td>
@@ -78,6 +75,22 @@
                     {% else %}
                     <p>No faculty member assigned</p>
                     {% endif %}
+                </td>
+            <td>
+                      <form style="text-align: start" action="/confirmDeleteSection/{{ i.SectionId }}/" method="get">
+                            {% csrf_token %}
+                            <button type="submit" STYLE="color:white; background: darkred">
+                                {% load bootstrap_icons %}
+                                {% bs_icon 'trash' %}
+                            </button>
+                    </form>
+                     <form style="text-align: start" action="/edit_section/{{ i.SectionId }}/" method="get">
+                            {% csrf_token %}
+                            <button type="submit" STYLE="color:white; background: goldenrod">
+                                {% load bootstrap_icons %}
+                                {% bs_icon 'pencil' %}
+                            </button>
+                     </form>
                 </td>
             </tr>
             {% endfor %}
