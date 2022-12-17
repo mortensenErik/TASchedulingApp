@@ -216,7 +216,6 @@ class EditCourse(View):
         return redirect('/courses/')
 
 
-
 class EditSection(View):
     @staticmethod
     def get(request, id):
