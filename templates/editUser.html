@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title>Edit Section</title>
+    <title>Create User</title>
 </head>
 <body>
 
@@ -38,45 +38,46 @@
 </nav>
 
 <div class="container-fluid">
-    <h1 class="jumbotron text-center" style="background-color: white">Edit Section {{ section }}</h1>
-    <form class="form-horizontal" action="/edit_section/{{ section.SectionId }}/" method="post">
+    <h1 class="jumbotron text-center" style="background-color: white">Editing user: {{ user.name }}</h1>
+    <form class="form-horizontal" action="/edit_user/{{ user.id }}/" method="post">
         {% csrf_token %}
+{#        <div class="form-group">#}
+{#            <label class="control-label col-sm-5">ID:</label>#}
+{#            <div class="col-sm-3"><input class="form-control" type="text" id="id" value="{{ user.id }}" name="id"></div>#}
+{#        </div>#}
         <div class="form-group">
-            <label class="control-label col-sm-5">Course</label>
-            <div class="col-sm-3">
-                <select class="form-control" name="course" id="course">
-                    <option value="{{ section.course }}" selected hidden disabled>{{ section.course }}</option>
-                    {% for course in courses %}
-                        <option value={{ course.CourseId }}>{{ course.name }}</option>
-                    {% endfor %}
-                </select>
+            <label class="control-label col-sm-5">UWM Email:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="email" value="{{ user.email }}"
+                                         name="email"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Name:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="name" value="{{ user.name }}" name="name">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Section Number:</label>
-            <div class="col-sm-3"><input class="form-control" value={{ section.number }} type="text" id="number"
-                                         name="number"></div>
+            <label class="control-label col-sm-5">Password:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="password" value="{{ user.password }}"
+                                         name="password"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Section type:</label>
-            <div class="col-sm-3">
-                <select class="form-control" name="type" id="type">
-                    <option value="{{ section.type }}" selected hidden disabled>{{ section.type }}</option>
-                    <option value="LEC">LEC</option>
-                    <option value="LAB">LAB</option>
-                </select>
-            </div>
+            <label class="control-label col-sm-5">Office Phone:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="phone" value="{{ user.phone }}"
+                                         name="phone"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Faculty: </label>
+            <label class="control-label col-sm-5">Office Address:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="address" value="{{ user.address }}"
+                                         name="address"></div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-5">Role:</label>
             <div class="col-sm-3">
-                <select class="form-control" name="faculty" id="faculty">
-                    <option value="{{ section.faculty }}" selected hidden disabled>{{ section.faculty }}</option>
-                    {% for user in users %}
-                        {% if user.role == "TA" or user.role == "INSTRUCTOR" %}
-                            <option value={{ user.id }}>{{ user.name }}</option>
-                        {% endif %}
-                    {% endfor %}
+                <select class="form-control" name="role" id="role">
+                    <option value="TA">TA</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Instructor">Instructor</option>
+                    <option value="{{ user.role }}" selected disabled hidden>{{ user.role }}</option>
                 </select>
             </div>
         </div>

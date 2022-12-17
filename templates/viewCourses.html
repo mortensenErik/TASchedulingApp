@@ -57,16 +57,13 @@
             <th>Course</th>
             <th>Name</th>
             <th>Sections:</th>
+            <th></th>
             </thead>
             <tbody>
             {% for i in courses %}
                 <tr>
                     <td>
-                    <form style="text-align: start" action="/confirmDeleteCourse/{{ i.CourseId }}/" method="get">
-                        {% csrf_token %}
-                        <button type="submit" STYLE="color:white; background: darkred"> - </button>
                         {{ i.subject }} {{ i.number }}
-                    </form>
                     </td>
                     <td>{{ i.name }}</td>
                     <td>
@@ -82,6 +79,22 @@
                             </tbody>
                         </table>
                     </td>
+                    <td>
+                            <form style="text-align: start" action="/confirmDeleteCourse/{{ i.CourseId }}/" method="get">
+                                {% csrf_token %}
+                                <button type="submit" STYLE="color:white; background: darkred">
+                                    {% load bootstrap_icons %}
+                                    {% bs_icon 'trash' %}
+                                </button>
+                            </form>
+                            <form style="text-align: start" action="/edit_course/{{ i.CourseId }}/" method="get">
+                                {% csrf_token %}
+                                <button type="submit" STYLE="color:white; background: goldenrod">
+                                    {% load bootstrap_icons %}
+                                    {% bs_icon 'pencil' %}
+                                </button>
+                            </form>
+                        </td>
                 </tr>
             {% endfor %}
             </tbody>

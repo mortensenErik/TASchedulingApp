@@ -7,7 +7,7 @@ from classes.UserClass import User
 from classes.SectionClass import SectionClass
 from classes.CourseClass import CourseClass
 from app.models import *
-
+from django.contrib import messages
 
 class Login(View):
     @staticmethod
@@ -23,14 +23,17 @@ class Login(View):
     @staticmethod
     def post(request):
         user = User.getUserByEmail(request.POST["email"])
-        if user is None:
+        if user is None or user == '':
+            messages.info(request, 'Incorrect username/password. Try again.')
             return render(request, "Login.html", {"error": "User does not exist"})
         else:
             if user.password != request.POST["password"]:
+                messages.info(request, 'Incorrect username/password. Try again.')
                 return render(request, "login.html", {"error": "Incorrect Password"})
             else:
                 request.session["email"] = user.email
                 request.session["role"] = user.role
+                login(request, user)
                 return redirect('home/')
 
 
@@ -54,7 +57,7 @@ class CreateUser(View):
 
     def post(self, request):
         creation = User.createUser(
-            id= request.POST["id"],
+            # id= request.POST["id"],
             email=request.POST["email"],
             name=request.POST["name"],
             password=request.POST["password"],
@@ -77,7 +80,7 @@ class CreateCourse(View):
     @staticmethod
     def post(request):
         creation = CourseClass.createCourse(
-            CourseId=request.POST["CourseId"],
+            # CourseId=request.POST["CourseId"],
             name=request.POST["name"],
             subject=request.POST["subject"],
             number=int(request.POST["number"])
@@ -102,8 +105,9 @@ class CreateSection(View):
         faculty = None
         if request.POST["faculty"]:
             faculty = User.getUserByEmail(request.POST["faculty"])
+            print('FACULTY')
+            print(faculty)
         creation = SectionClass.createSection(
-            SectionId=request.POST["SectionId"],
             course=course,
             faculty=faculty,
             number=int(request.POST["number"]),
@@ -181,20 +185,65 @@ class Courses(View):
 
 class EditUser(View):
     @staticmethod
-    def get(request):
-        return render(request, "editProfile.html")
+    def get(request, id):
+        user_to_edit = UserProfile.objects.get(id=id)
+        return render(request, "editUser.html",  {"user": user_to_edit})
+
+    @staticmethod
+    def post(request, id):
+        user = UserProfile.objects.get(id=id)
+        user.email = request.POST['email']
+        user.name = request.POST['name']
+        role = request.POST.get('role', False)
+        if role:
+            user.role = role
+        user.address = request.POST['address']
+        user.phone = request.POST['phone']
+        user.save()
+        return redirect('/users/')
 
 
 class EditCourse(View):
     @staticmethod
-    def get(request):
-        return render(request, "editCourse.html")
+    def get(request, id):
+        course_to_edit = Course.objects.get(CourseId=id)
+        return render(request, "editCourse.html", {'course': course_to_edit})
+
+    @staticmethod
+    def post(request, id):
+        course = Course.objects.get(CourseId=id)
+        course.name = request.POST['name']
+        course.number = request.POST['number']
+        course.subject = request.POST['subject']
+        course.save()
+        return redirect('/courses/')
 
 
 class EditSection(View):
     @staticmethod
-    def get(request):
-        return render(request, "editSection.html")
+    def get(request, id):
+        current_section = SectionClass.getSectionById(id)
+        return render(request, "editSection.html",
+                      {"section": current_section, 'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
+
+    @staticmethod
+    def post(request, id):
+        section = Section.objects.get(SectionId=id)
+        courseId = request.POST.get('course', False)
+        facultyId = request.POST.get('faculty', False)
+        type = request.POST.get('type', False)
+        number = request.POST['number']
+        section.number = number
+        if facultyId:
+            faculty = UserProfile.objects.get(id=facultyId)
+            section.faculty = faculty
+        if courseId:
+            course = Course.objects.get(CourseId=courseId)
+            section.course = course
+        if type:
+            section.type = type
+        section.save()
+        return redirect('/sections/')
 
 
 class Notifications(View):

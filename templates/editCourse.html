@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title>Edit Course</title>
+    <title>Edit Course {{ course }}</title>
 </head>
 <body>
 
@@ -24,20 +24,23 @@
 </nav>
 
 <div class="container-fluid">
-    <h1 class="jumbotron text-center" style="background-color: white">Edit Course</h1>
-    <form class="form-horizontal" action="/editCourse/" method="post">
+    <h1 class="jumbotron text-center" style="background-color: white">Editing course: {{ course.name }}</h1>
+    <form class="form-horizontal" action="/edit_course/{{ course.CourseId }}/" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <label class="control-label col-sm-5">Course Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseName}} id="courseName" name="courseName"></div>
+            <label class="control-label col-sm-5">Subject:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="subject" value="{{ course.subject }}" name="subject"></div>
         </div>
-        <div class="form-group">
+                <div class="form-group">
             <label class="control-label col-sm-5">Course Number:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseNumber}} id="courseNumber" name="courseNumber"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="number" value="{{ course.number }}" name="number"></div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-5">Course Instructor:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" value={{courseInstructor}} id="courseInstructor" name="courseInstructor"></div>
+            <label class="control-label col-sm-5">Course Name:</label>
+            <div class="col-sm-3"><input class="form-control" type="text" id="name" value="{{ course.name }}" name="name"></div>
+        </div>
+        <div class="form-group">
+            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit"></div>
         </div>
     </form>
 </div>
