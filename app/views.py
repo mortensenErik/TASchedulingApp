@@ -7,7 +7,7 @@ from classes.UserClass import User
 from classes.SectionClass import SectionClass
 from classes.CourseClass import CourseClass
 from app.models import *
-
+from django.contrib import messages
 
 class Login(View):
     @staticmethod
@@ -23,14 +23,17 @@ class Login(View):
     @staticmethod
     def post(request):
         user = User.getUserByEmail(request.POST["email"])
-        if user is None:
+        if user is None or user == '':
+            messages.info(request, 'Incorrect username/password. Try again.')
             return render(request, "Login.html", {"error": "User does not exist"})
         else:
             if user.password != request.POST["password"]:
+                messages.info(request, 'Incorrect username/password. Try again.')
                 return render(request, "login.html", {"error": "Incorrect Password"})
             else:
                 request.session["email"] = user.email
                 request.session["role"] = user.role
+                login(request, user)
                 return redirect('home/')
 
 
