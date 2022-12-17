@@ -208,8 +208,29 @@ class EditCourse(View):
 
 class EditSection(View):
     @staticmethod
-    def get(request):
-        return render(request, "editSection.html")
+    def get(request, id):
+        current_section = SectionClass.getSectionById(id)
+        return render(request, "editSection.html",
+                      {"section": current_section, 'courses': Course.objects.all(), 'users': UserProfile.objects.all()})
+
+    @staticmethod
+    def post(request, id):
+        section = Section.objects.get(SectionId=id)
+        courseId = request.POST.get('course', False)
+        facultyId = request.POST.get('faculty', False)
+        type = request.POST.get('type', False)
+        number = request.POST['number']
+        section.number = number
+        if facultyId:
+            faculty = UserProfile.objects.get(id=facultyId)
+            section.faculty = faculty
+        if courseId:
+            course = Course.objects.get(CourseId=courseId)
+            section.course = course
+        if type:
+            section.type = type
+        section.save()
+        return redirect('/sections/')
 
 
 class Notifications(View):
