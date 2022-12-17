@@ -80,7 +80,7 @@
                                 {% bs_icon 'trash' %}
                             </button>
                         </form>
-                        <form style="text-align: start" action="/edit_user/{{ i.email }}/" method="get">
+                        <form style="text-align: start" action="/edit_user/{{ i.id }}/" method="get">
                             {% csrf_token %}
                             <button type="submit" STYLE="color:white; background: goldenrod">
                                 {% load bootstrap_icons %}

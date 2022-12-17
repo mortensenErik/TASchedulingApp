@@ -55,5 +55,25 @@ class User:
 
 
 
+    # @staticmethod
+    # def editUser(id, email, password, name, phone, address, role):
+    #     if email:
+    #         current_user = User.getUserByEmail(email)
+    #         if current_user:
+    #             current_user.id = id
+    #             current_user.password = password
+    #             current_user.email = email
+    #             current_user.name = name
+    #             current_user.phone = phone
+    #             current_user.address = address
+    #             if role:
+    #                 current_user.role = role
+    #
+    #             current_user.save()
+    #         else:
+    #             raise ValueError("This user does not exist!")
+    #     else:
+    #         raise TypeError("Must provide valid email!")
+
 
 
