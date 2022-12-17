@@ -5,7 +5,7 @@ from app.models import UserProfile
 class testEditAccount(TestCase):
     def setUp(self):
         self.monkey = Client()
-        self.paul = UserProfile.objects.create(name='Paul', id='paulie', password='dietcoke', email='paulie@uwm.edu',
+        self.paul = UserProfile.objects.create(name='Paul', password='dietcoke', email='paulie@uwm.edu',
                                                phone='202-555-0198', address='abc129', role="Instructor")
 
     def testEditAccount(self):

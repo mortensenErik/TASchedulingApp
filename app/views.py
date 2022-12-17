@@ -23,7 +23,7 @@ class Login(View):
     @staticmethod
     def post(request):
         user = User.getUserByEmail(request.POST["email"])
-        if user is None:
+        if user is None or user == '':
             messages.info(request, 'Incorrect username/password. Try again.')
             return render(request, "Login.html", {"error": "User does not exist"})
         else:

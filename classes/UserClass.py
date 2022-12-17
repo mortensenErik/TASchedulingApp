@@ -10,7 +10,7 @@ class User:
                 return UserProfile.objects.get(email=email)
             else:
                 return None
-        raise TypeError("No parameter provided!")
+        #raise TypeError("No parameter provided!")
 
     @staticmethod
     def createUser(id,email, name, password, phone, address, role):
