@@ -14,19 +14,16 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-        <form class="navbar-form navbar-right" action="/profile/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="My Account">
-        </form>
         <form class="navbar-form navbar-right" action="" method="post">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
-        <form class="navbar-form navbar-right" action="/users/" method="get">
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
             {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Users">
+            <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-        <form class="navbar-form navbar-right" action="/courses/" method="get">
+        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+            <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
         </form>
@@ -34,9 +31,17 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Sections">
         </form>
+        {% endif %}
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
+        <form class="navbar-form navbar-right" action="/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Home">
+        </form>
     </div>
 </nav>
-
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Create a New Course</h1>
     <form class="form-horizontal" action="/new_course/" method="post">

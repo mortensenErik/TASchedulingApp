@@ -14,7 +14,7 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-        <form class="navbar-form navbar-right" action="/home/" method="post">
+        <form class="navbar-form navbar-right" action="" method="post">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
@@ -22,17 +22,19 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-         <form class="navbar-form navbar-right" action="/users/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Users">
-        </form>
-      <form class="navbar-form navbar-right" action="/courses/" method="get">
+        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+            <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
         </form>
         <form class="navbar-form navbar-right" action="/sections/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Sections">
+        </form>
+        {% endif %}
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
         </form>
         <form class="navbar-form navbar-right" action="/" method="get">
             {% csrf_token %}
