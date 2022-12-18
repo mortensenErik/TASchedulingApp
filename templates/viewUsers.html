@@ -24,13 +24,13 @@
         </form>
         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
             <form class="navbar-form navbar-right" action="/courses/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Courses">
-        </form>
-        <form class="navbar-form navbar-right" action="/sections/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Sections">
-        </form>
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Courses">
+            </form>
+            <form class="navbar-form navbar-right" action="/sections/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Sections">
+            </form>
         {% endif %}
         <form class="navbar-form navbar-right" action="/users/" method="get">
             {% csrf_token %}
@@ -52,12 +52,14 @@
                                          name="query"></div>
         </div>
     </form>
-    <div style="display:flex; justify-content: center">
-        <form action="/new_user" method="get">
-            {% csrf_token %}
-            <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new user">
-        </form>
-    </div>
+    {% if request.session.role == 'ADMIN' %}
+        <div style="display:flex; justify-content: center">
+            <form action="/new_user" method="get">
+                {% csrf_token %}
+                <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new user">
+            </form>
+        </div>
+    {% endif %}
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
             <thead>

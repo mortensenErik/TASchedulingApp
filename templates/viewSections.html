@@ -52,12 +52,14 @@
                                          name="query"></div>
         </div>
     </form>
+    {% if request.session.role == 'ADMIN'%}
     <div style="display:flex; justify-content: center">
         <form action="/new_section" method="get">
             {% csrf_token %}
             <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new section">
         </form>
     </div>
+    {% endif %}
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
             <thead>

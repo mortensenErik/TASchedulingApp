@@ -24,13 +24,13 @@
         </form>
         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
             <form class="navbar-form navbar-right" action="/courses/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Courses">
-        </form>
-        <form class="navbar-form navbar-right" action="/sections/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Sections">
-        </form>
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Courses">
+            </form>
+            <form class="navbar-form navbar-right" action="/sections/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Sections">
+            </form>
         {% endif %}
         <form class="navbar-form navbar-right" action="/users/" method="get">
             {% csrf_token %}
@@ -45,25 +45,26 @@
 
 <div class="container-fluid">
     <h1 class="jumbotron text-center" style="background-color: white">Choose a section to assign {{ user.name }} to</h1>
-    <form class="form-horizontal" action="/assignTa/{{ user.id }}/" method="post">
-        {% csrf_token %}
-        <label class="control-label col-sm-5">Unassigned sections: </label>
-        <div class="col-sm-3">
-        {% if length > 0 %}
-            <select class="form-control" name="section" id="section">
-                 {% for section in sections %}
-                     <option value={{ section.SectionId }}>{{section}}</option>
-                 {% endfor %}
-            </select>
-        {% else %}
-            <h1>There are no unassigned sections at this moment</h1>
-        {% endif %}
-        </div>
-         <div class="form-group">
-            <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit" value="Submit">
+    {% if length > 0 %}
+        <form class="form-horizontal" action="/assignTa/{{ user.id }}/" method="post">
+            {% csrf_token %}
+            <label class="control-label col-sm-5">Unassigned sections: </label>
+            <div class="col-sm-3">
+                <select class="form-control" name="section" id="section">
+                    {% for section in sections %}
+                        <option value={{ section.SectionId }}>{{ section }}</option>
+                    {% endfor %}
+                </select>
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <div class="align-middle col-sm-offset-5 col-sm-1"><input class="form-control" type="submit"
+                                                                          value="Submit">
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <h1 style="text-align: center">There are no unassigned sections at this moment</h1>
+    {% endif %}
 </div>
 
 </body>
