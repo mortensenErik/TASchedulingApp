@@ -22,7 +22,7 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-        {% if request.session.role == 'Admin' or request.session.role == 'Instructor' %}
+        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
             <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
@@ -65,7 +65,7 @@
             <th>Course:</th>
             <th>Section Type:</th>
             <th>Faculty:</th>
-            {% if user.session.role == 'Admin' %}
+            {% if request.session.role == 'ADMIN' %}
                 <th>Actions</th>
             {% endif %}
             </thead>
@@ -84,7 +84,7 @@
                             <p>No faculty member assigned</p>
                         {% endif %}
                     </td>
-                    {% if user.session.role == 'Admin' %}
+                    {% if request.session.role == 'ADMIN' %}
                         <td>
                             <form style="text-align: start" action="/confirmDeleteSection/{{ i.SectionId }}/"
                                   method="get">

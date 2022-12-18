@@ -21,7 +21,7 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-        {% if request.session.role == 'Admin' or request.session.role == 'Instructor' %}
+        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
             <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
