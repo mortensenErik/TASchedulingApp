@@ -29,7 +29,7 @@ urlpatterns = [
     path('confirmDeleteUser/<str:userID>/', confirmDeleteUser.as_view(), name="confirmDeleteUser"),
     path('confirmDeleteCourse/<str:courseID>/', confirmDeleteCourse.as_view(), name="confirmDeleteCourse"),
     path('confirmDeleteSection/<str:sectionID>/', confirmDeleteSection.as_view(), name="confirmDeleteSection"),
-    path('assignTa/<str:id>/', assignTA.as_view())
+    #path('assignTa/<str:id>/', assignTA.as_view())
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -33,7 +33,7 @@ class Login(View):
             else:
                 request.session["email"] = user.email
                 request.session["role"] = user.role
-                request.session['userId'] = user.id
+                login(request, user)
                 return redirect('home/')
 
 
@@ -91,6 +91,7 @@ class CreateCourse(View):
         else:
             print('creation is false')
             return render(request, "createCourse.html")
+
 
 
 class CreateSection(View):
@@ -155,7 +156,8 @@ class EditProfile(View):
 class Users(View):
     @staticmethod
     def get(request):
-        return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
+        return render(request, "viewUsers.html", {"users": UserProfile.objects.all().order_by
+                                                    ('role', 'name').values()})
 
     @staticmethod
     def post(request, email):
@@ -165,7 +167,8 @@ class Users(View):
 class Sections(View):
     @staticmethod
     def get(request):
-        return render(request, "viewSections.html", {"sections": Section.objects.all()})
+        return render(request, "viewSections.html", {"sections": Section.objects.all().order_by(
+                                'course__subject', 'course__number', 'number')})
 
     @staticmethod
     def post(request, SectionId):
@@ -175,7 +178,8 @@ class Sections(View):
 class Courses(View):
     @staticmethod
     def get(request):
-        return render(request, "viewCourses.html", {"courses": Course.objects.all()})
+        return render(request, "viewCourses.html", {"courses": Course.objects.all().order_by(
+                                                                        'subject', 'number')})
 
     @staticmethod
     def post(request, CourseId):
@@ -234,11 +238,8 @@ class EditSection(View):
         number = request.POST['number']
         section.number = number
         if facultyId:
-            if facultyId == 'None':
-                section.faculty = None
-            else:
-                faculty = UserProfile.objects.get(id=facultyId)
-                section.faculty = faculty
+            faculty = UserProfile.objects.get(id=facultyId)
+            section.faculty = faculty
         if courseId:
             course = Course.objects.get(CourseId=courseId)
             section.course = course
@@ -253,36 +254,20 @@ class Notifications(View):
     def get(request):
         return render(request, "sendNotifications.html")
 
-
 class confirmDeleteUser(View):
     @staticmethod
     def get(request, userID):
         return render(request, "confirmDeleteUser.html", {"user": UserProfile.objects.filter(id=userID).first()})
-
 
 class confirmDeleteCourse(View):
     @staticmethod
     def get(request, courseID):
         return render(request, "confirmDeleteCourse.html", {"course": Course.objects.filter(CourseId=courseID).first()})
 
-
 class confirmDeleteSection(View):
     @staticmethod
     def get(request, sectionID):
             return render(request, "confirmDeleteSection.html", {"section": Section.objects.filter(SectionId=sectionID).first()})
 
-
 class assignTA(View):
-    @staticmethod
-    def get(request, id):
-        user = UserProfile.objects.get(id=id)
-        sections = Section.objects.filter(faculty=None)
-        length = len(sections)
-        return render(request, "assignTA.html", {"user": user, "sections": sections, "length": length})
-
-    @staticmethod
-    def post(request, id):
-        section = Section.objects.get(SectionId=request.POST['section'])
-        section.faculty = UserProfile.objects.get(id=id)
-        section.save()
-        return redirect('/home/')
+    pass
