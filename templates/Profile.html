@@ -14,15 +14,16 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-        <form class="navbar-form navbar-right" action="/home/" method="post">
+        <form class="navbar-form navbar-right" action="" method="post">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
-         <form class="navbar-form navbar-right" action="/users/" method="get">
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
             {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Users">
+            <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-      <form class="navbar-form navbar-right" action="/courses/" method="get">
+        {% if request.session.role == 'Admin' or request.session.role == 'Instructor' %}
+            <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
         </form>
@@ -30,13 +31,17 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Sections">
         </form>
+        {% endif %}
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
         <form class="navbar-form navbar-right" action="/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Home">
         </form>
     </div>
 </nav>
-
 <div class="container-fluid" style="text-align:left">
     <h1 style="text-align: center">This is the profile page for {{ user.name }}</h1>
     <div class="row" style="text-align: center">
