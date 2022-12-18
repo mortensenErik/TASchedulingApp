@@ -9,8 +9,8 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-      {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
+    <div class="container-fluid">
+        {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
@@ -26,11 +26,11 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Users">
         </form>
-      <form class="navbar-form navbar-right" action="/courses/" method="get">
+        <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
         </form>
-      <form class="navbar-form navbar-right" action="/" method="get">
+        <form class="navbar-form navbar-right" action="/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Home">
         </form>
@@ -47,54 +47,59 @@
         </div>
     </form>
     <div style="display:flex; justify-content: center">
-       <form action="/new_section" method="get">
+        <form action="/new_section" method="get">
             {% csrf_token %}
             <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new section">
         </form>
     </div>
     <div class="col-sm-12">
         <table class="table table-bordered table-hover">
-        <thead>
+            <thead>
             <th>Section:</th>
             <th>Course:</th>
             <th>Section Type:</th>
             <th>Faculty:</th>
-            <th></th>
-        </thead>
-        <tbody>
+            {% if user.session.role == 'Admin' %}
+                <th>Actions</th>
+            {% endif %}
+            </thead>
+            <tbody>
             {% for i in sections %}
-            <tr>
-                <td>
-                     {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}
-                </td>
-                <td>{{ i.course.name }}</td>
-                <td>{{ i.type }}</td>
-                <td>
-                    {% if i.faculty %}
-                    {{ i.faculty.name }}
-                    {% else %}
-                    <p>No faculty member assigned</p>
+                <tr>
+                    <td>
+                        {{ i.course.subject }} {{ i.course.number }}-{{ i.number }}
+                    </td>
+                    <td>{{ i.course.name }}</td>
+                    <td>{{ i.type }}</td>
+                    <td>
+                        {% if i.faculty %}
+                            {{ i.faculty.name }}
+                        {% else %}
+                            <p>No faculty member assigned</p>
+                        {% endif %}
+                    </td>
+                    {% if user.session.role == 'Admin' %}
+                        <td>
+                            <form style="text-align: start" action="/confirmDeleteSection/{{ i.SectionId }}/"
+                                  method="get">
+                                {% csrf_token %}
+                                <button type="submit" STYLE="color:white; background: darkred">
+                                    {% load bootstrap_icons %}
+                                    {% bs_icon 'trash' %}
+                                </button>
+                            </form>
+                            <form style="text-align: start" action="/edit_section/{{ i.SectionId }}/" method="get">
+                                {% csrf_token %}
+                                <button type="submit" STYLE="color:white; background: goldenrod">
+                                    {% load bootstrap_icons %}
+                                    {% bs_icon 'pencil' %}
+                                </button>
+                            </form>
+                        </td>
                     {% endif %}
-                </td>
-            <td>
-                      <form style="text-align: start" action="/confirmDeleteSection/{{ i.SectionId }}/" method="get">
-                            {% csrf_token %}
-                            <button type="submit" STYLE="color:white; background: darkred">
-                                {% load bootstrap_icons %}
-                                {% bs_icon 'trash' %}
-                            </button>
-                    </form>
-                     <form style="text-align: start" action="/edit_section/{{ i.SectionId }}/" method="get">
-                            {% csrf_token %}
-                            <button type="submit" STYLE="color:white; background: goldenrod">
-                                {% load bootstrap_icons %}
-                                {% bs_icon 'pencil' %}
-                            </button>
-                     </form>
-                </td>
-            </tr>
+                </tr>
             {% endfor %}
-        </tbody>
+            </tbody>
         </table>
     </div>
 </div>
