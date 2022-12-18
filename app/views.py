@@ -42,7 +42,7 @@ class Login(View):
 class Home(View):
     @staticmethod
     def get(request):
-        return render(request, "Home.html", {"users": UserProfile.objects.all()})
+        return render(request, "Home.html", {"users": UserProfile.objects.all().order_by('name')})
 
     def post(self, request):
         del request.session["email"]
