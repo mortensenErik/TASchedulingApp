@@ -14,19 +14,16 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-        <form class="navbar-form navbar-right" action="/profile/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="My Account">
-        </form>
         <form class="navbar-form navbar-right" action="" method="post">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
-        <form class="navbar-form navbar-right" action="/users/" method="get">
+        <form class="navbar-form navbar-right" action="/profile/" method="get">
             {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Users">
+            <input class="btn btn-warning" type="submit" value="My Account">
         </form>
-        <form class="navbar-form navbar-right" action="/courses/" method="get">
+        {% if request.session.role == 'Admin' or request.session.role == 'Instructor' %}
+            <form class="navbar-form navbar-right" action="/courses/" method="get">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Courses">
         </form>
@@ -34,13 +31,18 @@
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Sections">
         </form>
+        {% endif %}
+        <form class="navbar-form navbar-right" action="/users/" method="get">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Users">
+        </form>
     </div>
 </nav>
 
 <div class="container-fluid" style="text-align:center">
     <div>
         <div>
-            <h1>You are a{% if request.session.role is not 'TA' %}n{% endif %}
+            <h1>You are a{% if request.session.role != 'TA' %}n{% endif %}
                 : {{ request.session.role }}</h1>
         </div>
         <h1>Current TA assignments</h1>
@@ -52,29 +54,31 @@
             <tbody>
             {% for i in users %}
                 {% if i.role == "TA" %}
-                <tr>
-                    <td>{{ i.name }}</td>
-                <td>
-                    <table>
-                        {% if i.section_set %}
-                            {% for section in i.section_set.all %}
-                            <tr>
-                                <td>{{ section }}</td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                            <p>This TA is not assigned to anything.</p>
-                        {% endif %}
-                    </table>
-                    <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>
+                            <table>
+                                {% if i.section_set %}
+                                    {% for section in i.section_set.all %}
+                                        <tr>
+                                            <td>{{ section }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>This TA is not assigned to anything.</p>
+                                {% endif %}
+                            </table>
+                            {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+                                <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
                                     {% csrf_token %}
                                     <button type="submit" STYLE="color:white; background: forestgreen">
                                         {% load bootstrap_icons %}
                                         {% bs_icon 'plus' %}
                                     </button>
-                    </form>
-                </td>
-                </tr>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
                 {% endif %}
             {% endfor %}
             </tbody>
