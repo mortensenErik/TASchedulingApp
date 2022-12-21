@@ -48,15 +48,15 @@
         {% csrf_token %}
         <div class="form-group">
             <label class="control-label col-sm-5">Subject:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="subject" name="subject"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="subject" name="subject" required></div>
         </div>
                 <div class="form-group">
             <label class="control-label col-sm-5">Course Number:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="number" name="number"></div>
+            <div class="col-sm-3"><input class="form-control" type="number" pattern="[0-9]*" maxlength="3" id="number" name="number"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Course Name:</label>
-            <div class="col-sm-3"><input class="form-control" type="text" id="name" name="name"></div>
+            <div class="col-sm-3"><input class="form-control" type="text" id="name" name="name" required></div>
         </div>
         <div class="form-group">
             <div class="align-middle col-sm-offset-5 col-sm-1">
