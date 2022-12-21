@@ -46,8 +46,7 @@
 <div class="container-fluid" style="text-align:center">
     <div>
         <div>
-            <h1>You are a{% if request.session.role != 'TA' %}n{% endif %}
-                : {{ request.session.role }}</h1>
+            <h1>Welcome {{ request.session.firstName }}</h1>
         </div>
         <h1>Current TA assignments</h1>
         <table class="table table-bordered table-hover">
