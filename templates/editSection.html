@@ -59,8 +59,8 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Section Number:</label>
-            <div class="col-sm-3"><input class="form-control" value={{ section.number }} type="text" id="number"
-                                         name="number"></div>
+            <div class="col-sm-3"><input class="form-control" value={{ section.number }} type="number" pattern="[0-9]*"  id="number"
+                                         name="number" required></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-5">Section type:</label>
@@ -78,7 +78,7 @@
                 <select class="form-control" name="faculty" id="faculty">
                     <option value="{{ section.faculty }}" selected hidden disabled>{{ section.faculty }}</option>
                     {% for user in users %}
-                        {% if user.role == "TA" or user.role == "INSTRUCTOR" %}
+                        {% if user.role == "TA" or user.role.capitalize == "INSTRUCTOR" %}
                             <option value={{ user.id }}>{{ user.name }}</option>
                         {% endif %}
                     {% endfor %}
