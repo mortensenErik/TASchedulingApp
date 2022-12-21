@@ -14,7 +14,7 @@
         <div class="navbar-header">
             <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
         </div>
-        <form class="navbar-form navbar-right" action="" method="post">
+        <form class="navbar-form navbar-right" action="/home/" method="post">
             {% csrf_token %}
             <input class="btn btn-warning" type="submit" value="Log Out">
         </form>
@@ -56,35 +56,62 @@
             <th style="text-align: center">Assigned to:</th>
             </thead>
             <tbody>
-            {% for i in users %}
-                {% if i.role == "TA" %}
-                    <tr>
-                        <td>{{ i.name }}</td>
-                        <td>
-                            <table>
-                                {% if i.section_set %}
-                                    {% for section in i.section_set.all %}
-                                        <tr>
-                                            <td>{{ section }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                {% else %}
-                                    <p>This TA is not assigned to anything.</p>
-                                {% endif %}
-                            </table>
-                            {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
-                                <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
-                                    {% csrf_token %}
-                                    <button type="submit" STYLE="color:white; background: forestgreen">
-                                        {% load bootstrap_icons %}
-                                        {% bs_icon 'plus' %}
-                                    </button>
-                                </form>
+            {% if request.session.role == 'TA' %}
+                {% for i in users %}
+                    {% if i.role == "TA" %}
+                        {% if i.email == request.session.email %}
+                            <tr>
+                                <td>{{ i.name }}</td>
+                                <td>
+                                    <table>
+                                        {% if i.section_set %}
+                                            {% for section in i.section_set.all %}
+                                                <tr>
+                                                    <td>{{ section }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>This TA is not assigned to anything.</p>
+                                        {% endif %}
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                 {% for i in users %}
+                    {% if i.role == "TA" %}
+                        {% if i.email != request.session.email %}
+                            <tr>
+                                <td>{{ i.name }}</td>
+                                <td>
+                                    <table>
+                                        {% if i.section_set %}
+                                            {% for section in i.section_set.all %}
+                                                <tr>
+                                                    <td>{{ section }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>This TA is not assigned to anything.</p>
+                                        {% endif %}
+                                    </table>
+                                    {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+                                        <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
+                                            {% csrf_token %}
+                                            <button type="submit" STYLE="color:white; background: forestgreen">
+                                                {% load bootstrap_icons %}
+                                                {% bs_icon 'plus' %}
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </td>
+                                </tr>
                             {% endif %}
-                        </td>
-                    </tr>
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
-            {% endfor %}
             </tbody>
         </table>
     </div>
