@@ -93,8 +93,8 @@
                                                 <p>This TA is not assigned to anything.</p>
                                             {% endif %}
                                         </table>
-                                        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
-                                            <form style="text-align: start" action="/assignTa/{{ i.id }}/" method="get">
+                                        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' or request.session.role == 'Instructor' %}
+                                            <form style="text-align: center" action="/assignTa/{{ i.id }}/" method="get">
                                                 {% csrf_token %}
                                                 <button type="submit" STYLE="color:white; background: forestgreen">
                                                     {% load bootstrap_icons %}
