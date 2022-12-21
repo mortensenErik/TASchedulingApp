@@ -112,15 +112,15 @@ class coursetests(TestCase):
 class UserUnitTests(TestCase):
     def setUp(self):
         self.nigel = UserProfile.objects.create(name='Nigel', id='bigboy', password='boogy', email='bigboy@uwm.edu',
-                                          phone='202-555-0196', role="INSTRUCTOR")
+                                          phone='202-555-0196', role="INSTRUCTOR", address='chicago')
         self.jacey = UserProfile.objects.create(name='Jacey', id='jacey', password='lmao', email='jacey@uwm.edu',
-                                          phone='202-555-0168', role="TA")
+                                          phone='202-555-0168', role="TA",  address='miami')
         self.anna = UserProfile.objects.create(name='Annabelle', id='lechonk', password='hiyah', email='lechonk@uwm.edu',
-                                         phone='202-555-0164', role="INSTRUCTOR")
+                                         phone='202-555-0164', role="INSTRUCTOR", address='milwaukee')
         self.luke = UserProfile.objects.create(name='Luke', id='bingbong', password='kiki', email='bingbong@uwm.edu',
-                                         phone='202-555-0157', role="ADMIN")
+                                         phone='202-555-0157', role="ADMIN",  address='new york')
         self.edytha = UserProfile.objects.create(name='Edytha', id='edytha', password='oof', email='edytha@uwm.edu',
-                                           phone='202-555-0182', role="TA")
+                                           phone='202-555-0182', role="TA",  address='DC')
 
 
     def test_getuserbyemail(self):
@@ -146,8 +146,48 @@ class UserUnitTests(TestCase):
 class Useredittest(TestCase):
 
     def setUp(self):
-        pass
+        self.nigel = UserProfile.objects.create(name='Nigel', id='bigboy', password='boogy', email='bigboy@uwm.edu',
+                                                phone='202-555-0196', role="INSTRUCTOR", address='chicago')
+        self.jacey = UserProfile.objects.create(name='Jacey', id='jacey', password='lmao', email='jacey@uwm.edu',
+                                                phone='202-555-0168', role="TA", address='miami')
+        self.anna = UserProfile.objects.create(name='Annabelle', id='lechonk', password='hiyah',
+                                               email='lechonk@uwm.edu',
+                                               phone='202-555-0164', role="INSTRUCTOR", address='milwaukee')
+        self.luke = UserProfile.objects.create(name='Luke', id='bingbong', password='kiki', email='bingbong@uwm.edu',
+                                               phone='202-555-0157', role="ADMIN", address='new york')
+        self.edytha = UserProfile.objects.create(name='Edytha', id='edytha', password='oof', email='edytha@uwm.edu',
+                                                 phone='202-555-0182', role="TA", address='DC')
 
 
-    def test_editedthing(self):
-        pass
+    def test_edit_noperson_found(self):
+        with self.assertRaises(ValueError) as context:
+            User.editProfileInfo('leck@uwm.edu', 'Annabelle', '202-555-0164', 'new jercy')
+
+    def test_when_no_emailisgiven(self):
+        with self.assertRaises(TypeError) as context:
+            User.editProfileInfo('', 'Annabelle', '202-555-0164', 'new jercy')
+
+    def test_changing_address(self):
+        User.editProfileInfo('lechonk@uwm.edu', 'Annabelle', '202-555-0164', 'new jercy')
+        self.assertEqual(User.getUserByEmail('lechonk@uwm.edu').address,'new jercy')
+
+    def test_changing_phone_no(self):
+        User.editProfileInfo('bingbong@uwm.edu', 'Luke', '202-555-7899', 'new york')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').phone,'202-555-7899')
+
+    def test_changing_name(self):
+        User.editProfileInfo('bingbong@uwm.edu', 'lakey', '202-555-7899', 'new york')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').name, 'lakey')
+
+    def test_changing_2_ORmore_things(self):
+        User.editProfileInfo('bingbong@uwm.edu', 'Luke', '202-999-7899', 'Los Angels')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').phone, '202-999-7899')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').address,  'Los Angels')
+
+#if nothing is given while editing the database, everthing but that will be made to NULL
+    def test_chaning_when_evrthing_but_email_is_gven(self):
+        User.editProfileInfo('bingbong@uwm.edu', '', '', '')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').phone,  '')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').address,'')
+        self.assertEqual(User.getUserByEmail('bingbong@uwm.edu').name,   '')
+
