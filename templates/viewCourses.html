@@ -45,18 +45,11 @@
 
 <div class="container-fluid">
     <h1 style="text-align: center">Courses</h1>
-    <form class="form-horizontal" action="/viewCourses/" method="get">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Search:</label>
-            <div class="col-sm-4"><input placeholder="Not implemented yet" class="form-control" type="text" id="query"
-                                         name="query"></div>
-        </div>
-    </form>
     {% if request.session.role == 'ADMIN' %}
         <div style="display:flex; justify-content: center">
             <form action="/new_course" method="get">
                 {% csrf_token %}
-                <input class="btn" style="background: forestgreen; color:white" type="submit" value="+ Add new course">
+                <input class="btn" style="background: forestgreen; color:white; margin-bottom: 5px" type="submit" value="+ Add new course">
             </form>
         </div>
     {% endif %}
@@ -95,14 +88,14 @@
                             <form style="text-align: start" action="/confirmDeleteCourse/{{ i.CourseId }}/"
                                   method="get">
                                 {% csrf_token %}
-                                <button type="submit" STYLE="color:white; background: darkred">
+                                <button class="btn btn-sm" type="submit" STYLE="color:white; background: darkred; margin-bottom: 5px">
                                     {% load bootstrap_icons %}
                                     {% bs_icon 'trash' %}
                                 </button>
                             </form>
                             <form style="text-align: start" action="/edit_course/{{ i.CourseId }}/" method="get">
                                 {% csrf_token %}
-                                <button type="submit" STYLE="color:white; background: goldenrod">
+                                <button class="btn btn-sm" type="submit" STYLE="color:white; background: goldenrod">
                                     {% load bootstrap_icons %}
                                     {% bs_icon 'pencil' %}
                                 </button>

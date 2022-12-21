@@ -15,10 +15,16 @@ class testAdminAssignTA(TestCase):
         self.cs361Lab = Section.objects.create(type='LAB', course=self.cs361, faculty=None,
                                                number="801")
 
-    def testAssignTA(self):
+    def testAssignTAEditSection(self):
         self.monkey.get("/edit_section/" + str(self.cs361Lab.SectionId) + "/")
         self.monkey.post("/edit_section/" + str(self.cs361Lab.SectionId) + "/", {"number": self.cs361Lab.number,
                                                                                  "faculty": self.frank.id,
                                                                                  "type": self.cs361Lab.type})
-        self.assertEqual(Section.objects.filter(SectionId=self.cs361Lab.SectionId).first().faculty, self.frank,
+        self.assertEqual(Section.objects.get(SectionId=self.cs361Lab.SectionId).faculty, self.frank,
+                         msg="TA not assigned to course")
+
+    def testAssignTAHomePage(self):
+        self.monkey.get("/assignTa/" + str(self.frank.id) + "/")
+        self.monkey.post("/assignTa/" + str(self.frank.id) + "/", {"section": self.cs361Lab.SectionId})
+        self.assertEqual(Section.objects.get(SectionId=self.cs361Lab.SectionId).faculty, self.frank,
                          msg="TA not assigned to course")
