@@ -33,7 +33,7 @@ class Login(View):
             else:
                 request.session["email"] = user.email
                 request.session["role"] = user.role
-                request.session['userId'] = user.id
+                request.session['firstName'] = user.name.split()[0]
                 return redirect('home/')
 
 
