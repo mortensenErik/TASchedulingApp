@@ -155,7 +155,8 @@ class EditProfile(View):
 class Users(View):
     @staticmethod
     def get(request):
-        return render(request, "viewUsers.html", {"users": UserProfile.objects.all()})
+        return render(request, "viewUsers.html", {"users": UserProfile.objects.all().order_by
+                                                    ('role', 'name').values()})
 
     @staticmethod
     def post(request, email):
@@ -165,7 +166,8 @@ class Users(View):
 class Sections(View):
     @staticmethod
     def get(request):
-        return render(request, "viewSections.html", {"sections": Section.objects.all()})
+        return render(request, "viewSections.html", {"sections": Section.objects.all().order_by(
+                                'course__subject', 'course__number', 'number')})
 
     @staticmethod
     def post(request, SectionId):
@@ -175,7 +177,8 @@ class Sections(View):
 class Courses(View):
     @staticmethod
     def get(request):
-        return render(request, "viewCourses.html", {"courses": Course.objects.all()})
+        return render(request, "viewCourses.html", {"courses": Course.objects.all().order_by(
+                                                                        'subject', 'number')})
 
     @staticmethod
     def post(request, CourseId):
