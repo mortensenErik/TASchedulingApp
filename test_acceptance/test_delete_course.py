@@ -18,5 +18,11 @@ class testDeleteSection(TestCase):
         tempCourseforsec1_lab = Section.objects.create( course=tempCourseforsec1, number=409,
                                                        type="LAB")
 
-    def testDeleteSections(self):
-        self.thingy.session("number") = self.Course
+     def testDeleteSections(self):
+        self.thingy.session["number"] = self.CS250.number
+        self.thingy.session["subject"]   = self.CS250.subject
+        self.thingy.get("/confirmDeleteCourse/" + str(self.CS251.CourseId) + "/")
+        self.thingy.post("/Course/CS805/")
+        self.assertEqual(len(Section.objects.filter(course_id=self.CS251.CourseId)), 0 , msg="course not deleted")
+
+
