@@ -54,7 +54,7 @@
     <form action="/edit_profile/" method="get" style="text-align: center">
         {% csrf_token %}
         <label>Edit my contact information: </label>
-        <button type="submit" STYLE="color:white; background: goldenrod">
+        <button class="btn btn-sm" type="submit" STYLE="color:white; background: goldenrod">
             {% load bootstrap_icons %}
             {% bs_icon 'pencil' %}
         </button>

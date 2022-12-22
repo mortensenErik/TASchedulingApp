@@ -95,7 +95,7 @@
                                         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' or request.session.role == 'Instructor' %}
                                             <form style="text-align: center" action="/assignTa/{{ i.id }}/" method="get">
                                                 {% csrf_token %}
-                                                <button type="submit" STYLE="color:white; background: forestgreen">
+                                                <button class="btn btn-sm" type="submit" STYLE="color:white; background: forestgreen">
                                                     {% load bootstrap_icons %}
                                                     {% bs_icon 'plus' %}
                                                 </button>
