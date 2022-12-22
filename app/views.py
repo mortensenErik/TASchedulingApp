@@ -57,15 +57,18 @@ class CreateUser(View):
         return render(request, "createUser.html")
 
     def post(self, request):
-        creation = User.createUser(
-            # id= request.POST["id"],
-            email=request.POST["email"],
-            name=request.POST["name"],
-            password=request.POST["password"],
-            role=request.POST["role"],
-            address=request.POST["address"],
-            phone=request.POST["phone"]
-        )
+        try:
+            creation = User.createUser(
+                # id= request.POST["id"],
+                email=request.POST["email"],
+                name=request.POST["name"],
+                password=request.POST["password"],
+                role=request.POST["role"],
+                address=request.POST["address"],
+                phone=request.POST["phone"]
+            )
+        except ValueError:
+            creation = None
         if creation:
             print('creation is true')
             return redirect('/users')

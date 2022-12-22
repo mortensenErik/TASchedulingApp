@@ -25,6 +25,8 @@ class User:
             raise ValueError("Invalid email")
         if len(phone) > 12:
             raise ValueError("Invalid phone")
+        if UserProfile.objects.filter(email=email):
+            raise ValueError("Duplicate Email")
         UserProfile.objects.create(email=email, name=name, password=password, phone=phone, address=address,
                                    role=role)
         return True

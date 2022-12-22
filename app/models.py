@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=13)
     address = models.CharField(max_length=50)
     role = models.CharField(max_length=20, choices=[('ADMIN', 'admin'), ('INSTRUCTOR', 'Instructor'), ('TA', 'TA')])
-    email = models.EmailField(max_length=20)
+    email = models.EmailField(max_length=20, unique=True)
 
     def __str__(self):
         return self.role + ": " + self.name
