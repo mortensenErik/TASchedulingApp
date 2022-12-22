@@ -20,7 +20,7 @@ class testDeleteSection(TestCase):
                                             type="LAB")
         self.CS251 = Course.objects.create(name="intermediate Computer Programming", number="251",
                                            subject="CS")
-    def testDeleteSections(self):
+    def testDeleteCourse(self):
         self.thingy.session["number"] = self.CS250.number
         self.thingy.session["subject"]   = self.CS250.subject
         self.thingy.get("/confirmDeleteCourse/" + str(self.CS251.CourseId) + "/")
