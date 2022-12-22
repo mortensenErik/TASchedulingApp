@@ -24,5 +24,3 @@ class testDeleteSection(TestCase):
         self.thingy.get("/confirmDeleteCourse/" + str(self.CS251.CourseId) + "/")
         self.thingy.post("/Course/CS805/")
         self.assertEqual(len(Section.objects.filter(course_id=self.CS251.CourseId)), 0 , msg="course not deleted")
-
-

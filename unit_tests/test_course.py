@@ -1,12 +1,13 @@
 from django.test import TestCase
-from app.models import Course
+
 from classes.CourseClass import *
+
 
 class TestCourse(TestCase):
 
     def setUp(self):
         self.CS361 = Course.objects.create(name="Introduction to Software Engineering", number="361",
-                                          subject="CS")
+                                           subject="CS")
         self.CS250 = Course.objects.create(name="Introductory Computer Programming", number="250", subject="CS")
         self.CS251 = Course.objects.create(name="Intermediate Computer Programming", number="251", subject="CS")
 
@@ -63,7 +64,3 @@ class TestCourse(TestCase):
             CourseClass.deleteCourse(course.CourseId)
         size = len(Course.objects.all())
         self.assertEqual(size, 0, msg="Failed to delete all courses")
-
-
-
-

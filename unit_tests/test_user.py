@@ -62,7 +62,6 @@ class UserUnitTests(TestCase):
             User.createUser(name="Jerry", password="none", phone=None, address="test", role="Monkey",
                             email="jerr@uwm.edu")
 
-
     def test_create_null_address(self):
         with self.assertRaises(ValueError, msg="Null address!!") as context:
             User.createUser(name="Jerry", password="none", phone="414-555-5555", address=None, role="Monkey",
