@@ -17,7 +17,7 @@ class UserUnitTests(TestCase):
                                            phone='202-555-0182', role="TA")
 
     def test_list_user_email(self):
-        admin_list = UserProfile.objects.filter(email='bingbong@umw.edu')
+        admin_list = UserProfile.objects.filter(email='bingbong@uwm.edu')
         self.assertEqual(len(admin_list), 1)
         test = UserProfile.objects.filter(email='test@uwm.edu')
         self.assertEqual(len(test), 0)
