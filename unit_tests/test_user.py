@@ -61,3 +61,17 @@ class UserUnitTests(TestCase):
         numberOfUsers = UserProfile.objects.all()
         self.assertEqual(len(numberOfUsers), 0, msg="Deleting all users failed")
 
+    def test_create_bad_user1(self):
+        with self.assertRaises(ValueError, msg="Invalid role!") as context:
+            User.createUser(name="Jerry", password="none", phone="414-555-5555", address="test", role="Monkey",
+                            email="jerr@uwm.edu")
+
+    def test_create_bad_user2(self):
+        with self.assertRaises(ValueError, msg="Invalid email!") as context:
+            User.createUser(name="Jerry", password="none", phone="414-555-5555", address="test", role="Monkey",
+                            email="jerruwm.edu")
+
+    def test_create_bad_user3(self):
+        with self.assertRaises(ValueError, msg="Invalid phone number!") as context:
+            User.createUser(name="Jerry", password="none", phone="414-555-555554", address="test", role="Monkey",
+                            email="jerr@uwm.edu")

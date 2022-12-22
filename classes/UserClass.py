@@ -12,11 +12,17 @@ class User:
                 return UserProfile.objects.get(email=email)
             else:
                 return None
-        #raise TypeError("No parameter provided!")
 
 
     @staticmethod
     def createUser(email, name, password, phone, address, role):
+        roles = ['TA', 'Instructor', 'INSTRUCTOR']
+        if role not in roles:
+            raise ValueError("Invalid role")
+        if '@' not in email:
+            raise ValueError("Invalid email")
+        if len(phone) > 12:
+            raise ValueError("Invalid phone")
         UserProfile.objects.create(email=email, name=name, password=password, phone=phone, address=address,
                                    role=role)
         return True
