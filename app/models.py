@@ -32,7 +32,7 @@ class Course(models.Model):
 class Section(models.Model):
     SectionId = models.AutoField(primary_key=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    faculty = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+    faculty = models.ForeignKey(UserProfile, on_delete= models.SET_NULL, null=True, blank=True)
     number = models.CharField(max_length=3)
     type = models.CharField(max_length=3, choices=[('LEC', 'lecture'), ('LAB', 'lab')])
 
