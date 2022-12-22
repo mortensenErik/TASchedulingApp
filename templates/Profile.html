@@ -7,12 +7,11 @@
     <title>Profile</title>
 </head>
 <body>
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
         <div class="navbar-header">
-            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+            <p class="navbar-brand" style="color:#FFC107; font-family: 'Arial Black'">UWM TA Scheduler Application</p>
         </div>
         <form class="navbar-form navbar-right" action="/home/" method="post">
             {% csrf_token %}
@@ -23,14 +22,18 @@
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+            <form class="navbar-form navbar-right" action="/notifications/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Notify">
+            </form>
             <form class="navbar-form navbar-right" action="/courses/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Courses">
-        </form>
-        <form class="navbar-form navbar-right" action="/sections/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Sections">
-        </form>
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Courses">
+            </form>
+            <form class="navbar-form navbar-right" action="/sections/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Sections">
+            </form>
         {% endif %}
         <form class="navbar-form navbar-right" action="/users/" method="get">
             {% csrf_token %}

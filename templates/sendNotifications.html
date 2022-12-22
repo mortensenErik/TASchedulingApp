@@ -12,7 +12,7 @@
     <div class="container-fluid">
         {% load static %} <img src="{% static "/media/logo.png" %}" alt="logo" class="navbar-brand" height="300"/>"
         <div class="navbar-header">
-            <p class="navbar-brand" style="color:#FFC107">UWM TA Scheduler Application</p>
+            <p class="navbar-brand" style="color:#FFC107; font-family: 'Arial Black'">UWM TA Scheduler Application</p>
         </div>
         <form class="navbar-form navbar-right" action="/home/" method="post">
             {% csrf_token %}
@@ -23,6 +23,10 @@
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+            <form class="navbar-form navbar-right" action="/notifications/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Notify">
+            </form>
             <form class="navbar-form navbar-right" action="/courses/" method="get">
                 {% csrf_token %}
                 <input class="btn btn-warning" type="submit" value="Courses">
@@ -52,7 +56,7 @@
             <div class="col-sm-3">
                 <select class="form-control" name="recipient" id="recipient" required>
                  {% for user in users %}
-                         <option value={{ user.email }}>{{ user.name }}</option>
+                         <option value={{ user.email }}>{{ user.email }}</option>
                  {% endfor %}
                 </select>
             </div>

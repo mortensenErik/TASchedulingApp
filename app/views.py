@@ -260,14 +260,15 @@ class Notifications(View):
 
     @staticmethod
     def post(request):
-        send_mail(
-            'Notification from' + request.session['email'],
-            request.POST['message'],
-            # request.session['email'],
-            'haitamchouiekh@gmail.com',
-            [request.POST['recipient']],
-            fail_silently=False,
-        )
+        # Cannot get this to work :(
+        # send_mail(
+        #     'Notification from' + request.session['email'],
+        #     request.POST['message'],
+        #     # request.session['email'],
+        #     'haitamchouiekh@gmail.com',
+        #     [request.POST['recipient']],
+        #     # fail_silently=False,
+        # )
         return redirect('/home/')
 
 class confirmDeleteUser(View):
