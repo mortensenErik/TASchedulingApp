@@ -6,7 +6,7 @@ class TestAdminViewData(TestCase):
     def setUp(self):
         self.monkey = Client()
         self.nigel = UserProfile.objects.create(name='Nigel', password='boogy', email='bigboy@uwm.edu',
-                                                phone='202-555-0196', address='abc123', role="Instructor")
+                                                phone='202-555-0196', address='abc123', role="INSTRUCTOR")
         self.frank = UserProfile.objects.create(name='Frank', password='bratwurst', email='frankf@uwm.edu',
                                                 phone='202-555-0144', address='abc123', role="TA")
         self.cs361 = Course.objects.create(name='Intro to Software Engineering', number='361',
@@ -18,8 +18,8 @@ class TestAdminViewData(TestCase):
 
     def testViewUsers(self):
         resp = self.monkey.get("/users/")
-        self.assertIn(self.nigel, resp.context["users"], msg="Not all users displayed")
-        self.assertIn(self.frank, resp.context["users"], msg="Not all users displayed")
+        self.assertEqual(self.nigel.name, resp.context["users"][0]["name"], msg="Not all users displayed")
+        self.assertIn(self.frank.name, resp.context["users"][1]["name"], msg="Not all users displayed")
 
     def testViewCourses(self):
         resp = self.monkey.get("/courses/")
