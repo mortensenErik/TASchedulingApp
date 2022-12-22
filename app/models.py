@@ -22,7 +22,7 @@ class UserProfile(models.Model):
 class Course(models.Model):
     CourseId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
-    number = models.IntegerField(default=0)
+    number = models.CharField(max_length=3)
     subject = models.CharField(max_length=10, null=True)
 
     def __str__(self):

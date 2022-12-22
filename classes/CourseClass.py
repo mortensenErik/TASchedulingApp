@@ -11,10 +11,16 @@ class CourseClass:
                 return Course.objects.get(CourseId=CourseId)
             else:
                 return None
-        raise TypeError("No parameter provided!")
+        raise ValueError("No parameter provided!")
 
     @staticmethod
     def createCourse(name, subject, number):
+        if not name or not subject or not number:
+            raise ValueError("You passed in a null parameter!")
+        if len(number) > 3:
+            raise ValueError("Number is too big!")
+        if Course.objects.filter(name=name):
+            raise ValueError("Duplicate name!")
         Course.objects.create(name=name, subject=subject, number=number)
         return True
 
