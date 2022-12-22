@@ -254,7 +254,8 @@ class EditSection(View):
 class Notifications(View):
     @staticmethod
     def get(request):
-        return render(request, "sendNotifications.html")
+        users = UserProfile.objects.all()
+        return render(request, "sendNotifications.html", {"users": users})
 
 
 class confirmDeleteUser(View):
