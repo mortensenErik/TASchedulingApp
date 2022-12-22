@@ -18,7 +18,7 @@ class User:
     def createUser(email, name, password, phone, address, role):
         if not email or not name or not password or not phone or not address or not role:
             raise ValueError("One of the value is null!")
-        roles = ['TA', 'Instructor', 'INSTRUCTOR']
+        roles = ['TA', 'Instructor', 'INSTRUCTOR', 'ADMIN', 'admin']
         if role not in roles:
             raise ValueError("Invalid role")
         if '@' not in email:
