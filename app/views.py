@@ -87,7 +87,7 @@ class CreateCourse(View):
             # CourseId=request.POST["CourseId"],
             name=request.POST["name"],
             subject=request.POST["subject"],
-            number=int(request.POST["number"])
+            number=request.POST["number"]   # int(request.POST["number"])
         )
         if creation:
             print('creation is true')

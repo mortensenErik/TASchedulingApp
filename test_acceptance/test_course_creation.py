@@ -1,5 +1,4 @@
 from django.test import TestCase, Client
-from django.db import IntegrityError
 from app.models import Course
 
 
@@ -15,6 +14,6 @@ class testCreateCourse(TestCase):
         self.assertEqual(len(Course.objects.filter(name="Binary Mathematics")), 1, msg="Course was not created")
 
     def testCreateOldCourse(self):
-        with self.assertRaises(IntegrityError, msg="Multiple identical courses were created") as context:
+        with self.assertRaises(ValueError, msg="Multiple identical courses were created") as context:
             self.monkey.post("/new_course/", {"name": "Intro to Software Engineering", "number": "361",
                                               "subject": "COMPSCI"})
