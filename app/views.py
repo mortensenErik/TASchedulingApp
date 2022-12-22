@@ -8,6 +8,7 @@ from classes.SectionClass import SectionClass
 from classes.CourseClass import CourseClass
 from app.models import *
 from django.contrib import messages
+from django.core.mail import send_mail
 
 class Login(View):
     @staticmethod
@@ -257,6 +258,17 @@ class Notifications(View):
         users = UserProfile.objects.all()
         return render(request, "sendNotifications.html", {"users": users})
 
+    @staticmethod
+    def post(request):
+        send_mail(
+            'Notification from' + request.session['email'],
+            request.POST['message'],
+            # request.session['email'],
+            'haitamchouiekh@gmail.com',
+            [request.POST['recipient']],
+            fail_silently=False,
+        )
+        return redirect('/home/')
 
 class confirmDeleteUser(View):
     @staticmethod
