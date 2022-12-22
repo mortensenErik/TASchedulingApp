@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Home</title>
-    <style>h1{height: 100px}</style>
-    <style>h2{margin-top: -80px}</style>
-    <style>table{margin-left: auto; margin-right: auto}</style>
+    <style>h1 {
+        height: 100px
+    }</style>
+    <style>h2 {
+        margin-top: -80px
+    }</style>
+    <style>table {
+        margin-left: auto;
+        margin-right: auto
+    }</style>
 </head>
 <body>
 
@@ -26,14 +33,18 @@
             <input class="btn btn-warning" type="submit" value="My Account">
         </form>
         {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' %}
+            <form class="navbar-form navbar-right" action="/notifications/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Notify">
+            </form>
             <form class="navbar-form navbar-right" action="/courses/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Courses">
-        </form>
-        <form class="navbar-form navbar-right" action="/sections/" method="get">
-            {% csrf_token %}
-            <input class="btn btn-warning" type="submit" value="Sections">
-        </form>
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Courses">
+            </form>
+            <form class="navbar-form navbar-right" action="/sections/" method="get">
+                {% csrf_token %}
+                <input class="btn btn-warning" type="submit" value="Sections">
+            </form>
         {% endif %}
         <form class="navbar-form navbar-right" action="/users/" method="get">
             {% csrf_token %}
@@ -52,60 +63,60 @@
             <h1>Welcome {{ request.session.firstName }}</h1>
         </div>
         <h1>Current TA assignments</h1>
-        <table class="table table-bordered table-hover"; style="width: 50%">
+        <table class="table table-bordered table-hover" ; style="width: 50%">
             <thead>
             <th style="text-align: center">TA:</th>
             <th style="text-align: center">Assigned to:</th>
             </thead>
             <tbody>
-                {% for i in users %}
-                    {% if i.role == "TA" %}
-                        {% if i.email == request.session.email %}
-                            <tr>
-                                <td width="40%"><strong>{{ i.name }}</strong></td>
-                                <td>
-                                    <table>
-                                        {% if i.section_set %}
-                                            {% for section in i.section_set.all %}
-                                                <tr>
-                                                    <td width="20%"><strong>{{ section }}</strong></td>
-                                                </tr>
-                                            {% endfor %}
-                                        {% else %}
-                                            <p>This TA is not assigned to anything.</p>
-                                        {% endif %}
-                                    </table>
-                                </td>
-                            </tr>
-                            {% else %}
-                                <tr>
-                                    <td width="40%">{{ i.name }}</td>
-                                    <td>
-                                        <table>
-                                            {% if i.section_set %}
-                                                {% for section in i.section_set.all %}
-                                                    <tr>
-                                                        <td width="20%">{{ section }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            {% else %}
-                                                <p>This TA is not assigned to anything.</p>
-                                            {% endif %}
-                                        </table>
-                                        {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' or request.session.role == 'Instructor' %}
-                                            <form style="text-align: center" action="/assignTa/{{ i.id }}/" method="get">
-                                                {% csrf_token %}
-                                                <button class="btn btn-sm" type="submit" STYLE="color:white; background: forestgreen">
-                                                    {% load bootstrap_icons %}
-                                                    {% bs_icon 'plus' %}
-                                                </button>
-                                            </form>
-                                        {% endif %}
-                                    </td>
-                                    </tr>
-                        {% endif %}
+            {% for i in users %}
+                {% if i.role == "TA" %}
+                    {% if i.email == request.session.email %}
+                        <tr>
+                            <td width="40%"><strong>{{ i.name }}</strong></td>
+                            <td>
+                                <table>
+                                    {% if i.section_set %}
+                                        {% for section in i.section_set.all %}
+                                            <tr>
+                                                <td width="20%"><strong>{{ section }}</strong></td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>This TA is not assigned to anything.</p>
+                                    {% endif %}
+                                </table>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td width="40%">{{ i.name }}</td>
+                            <td>
+                                <table>
+                                    {% if i.section_set %}
+                                        {% for section in i.section_set.all %}
+                                            <tr>
+                                                <td width="20%">{{ section }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>This TA is not assigned to anything.</p>
+                                    {% endif %}
+                                </table>
+                                {% if request.session.role == 'ADMIN' or request.session.role == 'INSTRUCTOR' or request.session.role == 'Instructor' %}
+                                    <form style="text-align: center" action="/assignTa/{{ i.id }}/" method="get">
+                                        {% csrf_token %}
+                                        <button type="submit" STYLE="color:white; background: forestgreen">
+                                            {% load bootstrap_icons %}
+                                            {% bs_icon 'plus' %}
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
                     {% endif %}
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
     </div>

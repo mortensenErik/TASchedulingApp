@@ -27,15 +27,7 @@ class SectionClass:
     def createSection(course, faculty, number, type):
         Section.objects.create(course=course, faculty=faculty, number=number, type=type)
         return True
-        # print('in createSection')
-        # if SectionClass.getSectionById(SectionId=SectionId) is None:
-        #     if SectionClass.getSectionByNumber(number=number):
-        #         return False
-        #     else:
-        #
-        #         return True
-        # else:
-        #     return False
+
 
     @staticmethod
     def deleteSection(SectionId):
@@ -43,7 +35,3 @@ class SectionClass:
             SectionClass.getSectionById(SectionId=SectionId).delete()
         else:
             raise TypeError("No parameter provided!")
-
-    @staticmethod
-    def editSection(SectionId,course, faculty, number, type):
-        pass

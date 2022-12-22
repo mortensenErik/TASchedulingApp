@@ -12,11 +12,21 @@ class User:
                 return UserProfile.objects.get(email=email)
             else:
                 return None
-        #raise TypeError("No parameter provided!")
 
 
     @staticmethod
     def createUser(email, name, password, phone, address, role):
+        if not email or not name or not password or not phone or not address or not role:
+            raise ValueError("One of the value is null!")
+        roles = ['TA', 'Instructor', 'INSTRUCTOR', 'ADMIN', 'admin']
+        if role not in roles:
+            raise ValueError("Invalid role")
+        if '@' not in email:
+            raise ValueError("Invalid email")
+        if len(phone) > 12:
+            raise ValueError("Invalid phone")
+        if UserProfile.objects.filter(email=email):
+            raise ValueError("Duplicate Email")
         UserProfile.objects.create(email=email, name=name, password=password, phone=phone, address=address,
                                    role=role)
         return True
@@ -24,9 +34,13 @@ class User:
     @staticmethod
     def deleteUser(email):
         if email:
-            User.getUserByEmail(email).delete()
+            user = User.getUserByEmail(email)
+            if user:
+                user.delete()
+            else:
+                raise ValueError("No user with this email exists!")
         else:
-            raise TypeError("No parameter provided!")
+            raise ValueError("No parameter provided!")
 
     @staticmethod
     def editProfileInfo(email, name, phone, address):
