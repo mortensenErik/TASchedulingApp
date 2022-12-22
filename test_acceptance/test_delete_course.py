@@ -4,7 +4,7 @@ from app.models import Course
 from app.models import Section
 
 
-class testDeleteSection(TestCase):
+class testDeleteCourse(TestCase):
     def setUp(self):
         self.thingy = Client()
         self.rock = UserProfile.objects.create(name="Jay Rock", password="pw", phone="414-555-5556",
