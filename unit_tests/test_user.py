@@ -44,12 +44,20 @@ class UserUnitTests(TestCase):
         self.assertEqual(len(admin_list), 0)
         
     def test_create_user(self):
-        test = User.createUser(name="Jerry", password="none", phone="414-555-5555", address="test", role="TA",
+        User.createUser(name="Jerry", password="none", phone="414-555-5555", address="test", role="TA",
                                email="jerr@uwm.edu")
         lookup = UserProfile.objects.all()
         self.assertEqual(len(lookup), 6, msg="Error: unable to delete user")
         
     def test_delete_user(self):
-        test = User.deleteUser(email="bigboy@uwm.edu")
+        User.deleteUser(email="bigboy@uwm.edu")
         lookup = UserProfile.objects.all()
         self.assertEqual(len(lookup), 4, msg="Error: unable to delete user")
+
+
+    def test_delete_all(self):
+        for user in UserProfile.objects.all():
+            User.deleteUser(email=user.email)
+        numberOfUsers = UserProfile.objects.all()
+        self.assertEqual(len(numberOfUsers), 0, msg="Deleting all users failed")
+
