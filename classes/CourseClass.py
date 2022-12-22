@@ -26,8 +26,12 @@ class CourseClass:
 
     @staticmethod
     def deleteCourse(CourseId):
-        if id:
-            CourseClass.getCourseById(CourseId=CourseId).delete()
+        if CourseId:
+            course = CourseClass.getCourseById(CourseId=CourseId)
+            if course:
+                course.delete()
+            else:
+                raise ValueError("this course does not exist!")
         else:
-            raise TypeError("No parameter provided!")
+            raise ValueError("No parameter provided!")
 

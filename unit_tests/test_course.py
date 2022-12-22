@@ -50,10 +50,20 @@ class TestCourse(TestCase):
         with self.assertRaises(ValueError, msg="course with this name already exists") as context:
             CourseClass.createCourse(name="Introduction to Software Engineering", number="361", subject="CS")
 
-    # def test_course_delete(self):
-    #     test = CourseClass.createCourse(name="Introduction to Software Engineering", number="361", subject="CS")
-    #     lookup = list(Course.objects.all())
-    #     self.assertEqual(len(lookup), 2, msg="Error: course was not deleted")
+    def test_delete_null(self):
+        with self.assertRaises(ValueError, msg="Paremeter is null") as context:
+            CourseClass.deleteCourse(None)
+
+    def test_delete_nonexistent_course(self):
+        with self.assertRaises(ValueError, msg="This course does not exist") as context:
+            CourseClass.deleteCourse(3244242342)
+
+    def test_delete_all_course(self):
+        for course in Course.objects.all():
+            CourseClass.deleteCourse(course.CourseId)
+        size = len(Course.objects.all())
+        self.assertEqual(size, 0, msg="Failed to delete all courses")
+
 
 
 
